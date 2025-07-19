@@ -1,0 +1,35 @@
+:root {
+    /* Colors */
+    --white-color: rgba(255, 255, 255, 1);
+    --very-light-gray-color: rgba(128, 128, 128, 0.1);
+    --light-gray-color: rgba(128, 128, 128, 0.2);
+    --medium-gray-color: rgba(128, 128, 128, 0.4);
+    --dark-gray-color: rgba(128, 128, 128, 0.8);
+    --very-dark-gray-color: rgba(0, 0, 0, 0.8);
+
+    /* Paddings */
+    --small-padding: 0.5rem;
+    --normal-padding: 1rem;
+    --large-padding: 2rem;
+
+    /* Gaps */
+    --small-gap: 0.5rem;
+    --normal-gap: 1rem;
+    --big-gap: 2rem;
+
+    /* Border Radius */
+    --small-border-radius: 0.25rem;
+    --normal-border-radius: 0.5rem;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: 'Inter',sans-serif;
+    color: var(--very-dark-gray-color);
+}
+
+.link {
+    text-decoration: none;
+}

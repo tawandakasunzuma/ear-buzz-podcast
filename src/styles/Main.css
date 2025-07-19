@@ -1,0 +1,5 @@
+main {
+    background-color: var(--very-light-gray-color);
+    padding: var(--normal-padding) var(--large-padding);
+    min-height: 90vh;
+}

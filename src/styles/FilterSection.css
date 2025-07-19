@@ -1,0 +1,15 @@
+.filter-section {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--normal-gap);
+    margin: 1rem 0;
+}
+
+.all-genres,
+.recently-updated {
+    padding: 0.375rem;
+    border: 1px solid var(--medium-gray-color);
+    border-radius: var(--normal-border-radius);
+}

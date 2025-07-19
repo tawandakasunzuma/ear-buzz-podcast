@@ -1,0 +1,125 @@
+/* Podcast container */
+
+.podcast-container {
+    margin-top: 1rem;
+    background-color: var(--white-color);
+    padding: var(--normal-padding);
+    border-radius: var(--normal-border-radius);
+    box-shadow: 0 2px 4px var(--light-gray-color);
+    width: 100%;
+    transition: all 600ms ease-in-out;
+    max-width: 320px;
+}
+
+.podcast-container:hover,
+.podcast-container:focus {
+    box-shadow: 0 4px 8px var(--medium-gray-color);
+    transform: translateY(-4px);
+}
+
+/* Podcast image */
+
+.image-container {
+    position: relative;
+    margin-bottom: 0.75rem;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.podcast-image {
+    height: auto;
+    width: 100%;
+    border-radius: var(--normal-border-radius);
+    cursor: pointer;
+    object-fit: cover;
+    position: relative;
+    z-index: 1;
+    transition: opacity 300ms ease-in-out 150ms;
+    display: block;
+}
+
+.podcast-image:hover,
+.podcast-image:active {
+    opacity: 0.15;
+}
+
+.podcast-cover-title {
+    display: flex;
+    font-weight: bold;
+    padding: 0 0.5rem;
+    justify-content: center;
+    align-items: center;
+    color: var(--white-color);
+    border-radius: var(--normal-border-radius);
+    text-align: center;
+    background-color: black;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    transform: none;
+    box-sizing: border-box;
+}
+
+/* Podcast title */
+
+.podcast-title {
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+/* Seasons section */
+
+.seasons-section {
+    display: flex;
+    align-items: center;
+    gap: var(--small-gap);
+    margin: 0.5rem 0;
+}
+
+.seasons-icon {
+    width: 20px;
+    cursor: auto;
+}
+
+.num-seasons {
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+/* Genre section */
+
+.genre-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem var(--small-gap);
+    margin: 0.5rem 0;
+}
+
+.genre-name {
+    background-color: var(--light-gray-color);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.125rem 0.5rem;
+    border-radius: var(--small-border-radius);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 300ms ease-in-out;
+}
+
+.genre-name:hover,
+.genre-name:focus {
+    background-color: rgba(128, 128, 128, 0.075);
+}
+
+/* Updated Status */
+
+.updated-status {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--dark-gray-color);
+    margin-top: 0.5rem;
+}

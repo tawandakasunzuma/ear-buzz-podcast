@@ -1,0 +1,10 @@
+/* Cards */
+
+.card-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--big-gap);
+    margin-bottom: 3rem;
+    align-content: center;
+    justify-items: center;
+}

@@ -1,0 +1,112 @@
+/* ===============
+    Loader
+=============== */
+
+.loading-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.loading-circle {
+    width: 60px;
+    height: 60px;
+    border: 5px solid rgba(35, 70, 105, 0.125);
+    border-top: 5px solid rgba(35, 70, 105,0.5);
+    border-right: 5px solid rgba(35, 70, 205,0.75);
+    border-radius: 50%;
+    animation: spinnerLoader 1200ms linear infinite;
+}
+
+.loading-text {
+    color: rgba(35, 70, 105, 0.75);
+    font-size: 1rem;
+}
+
+@keyframes spinnerLoader {
+    25%{
+        border-bottom: 5px solid rgba(35, 70, 205,0.75);
+    }
+    50% {
+        border-left: 5px solid rgba(35, 70, 205,0.75);
+    }
+    75% {
+        border-top: 5px solid rgba(35, 70, 205,0.75);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@media (max-width: 480px) {
+    .loading-circle {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .loading-circle {
+        width: 45px;
+        height: 45px;
+    }
+}
+
+/* ===============
+    Error Message
+=============== */
+
+.error-container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid rgba(35, 70, 105, 0.75);
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    animation: borderFlicker 1200ms ease-in-out infinite alternate;
+}
+
+@keyframes borderFlicker {
+    75% {
+        border: 2px solid rgba(35, 70, 105, 0.25);
+    }
+    100% {
+        border: 2px solid rgba(35, 70, 105, 0.0625)
+    }
+}
+
+.error-msg {
+    color: rgb(35, 70, 105);
+    font-size: 1.125rem;
+}
+
+@media (max-width: 600px) {
+    .error-msg {
+        color: rgb(35, 70, 105);
+        font-size: 1.125rem;
+        font-weight: bold;
+    }
+}
+
+/* ===============
+    No podcast found
+=============== */
+
+.no-podcasts-container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.no-podcasts-text {
+    color: var(--dark-gray-color);
+    font-size: 1.125rem;
+}
