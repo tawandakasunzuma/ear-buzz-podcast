@@ -1,7 +1,7 @@
 import "../styles/Header.css"
 import accountCircle from '../assets/images/account-circle-icon.svg'
 import searchIcon from "../assets/images/search-icon.svg"
-import podcastIcon from "../assets/images/podcast-icon.svg"
+import podcastIcon from "../assets/images/ear-buzz-logo.png"
 
 export default function Header ({searchLetters,setSearchLetters}) {
 
@@ -11,7 +11,7 @@ export default function Header ({searchLetters,setSearchLetters}) {
             {/* Name of podcast website */}
             <div className="header-left">
                 <img className="icon-1" src={podcastIcon} alt="Podcast icon" />
-                <h1 className="app-name">Podcast App</h1>
+                <h1 className="app-name">Ear Buzz</h1>
             </div>
 
             <div className="header-right">
