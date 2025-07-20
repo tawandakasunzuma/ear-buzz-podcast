@@ -51,6 +51,9 @@ header {
     header {
         gap: 1rem;
     }
+    .app-name {
+        font-size: 0.875rem;
+    }
     .search-bar {
         width: 75%;
     }
@@ -77,7 +80,7 @@ header {
 
 @media (max-width: 768px) {
     .app-name {
-        font-size: 1.125rem;
+        font-size: 1rem;
     }
     .icon-1,
     .icon-2,
