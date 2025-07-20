@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Main from './components/Main';
+import AudioPlayer from "./components/AudioPlayer";
 import ShowDetail from './components/ShowDetail';
 
 import "./styles/App.css"
@@ -181,6 +182,9 @@ export default function App() {
             <p className='loading-text'>Loading...</p>
           </div>
         }
+
+        {/* Audio player */}
+        <AudioPlayer />
     </>
   )
 }

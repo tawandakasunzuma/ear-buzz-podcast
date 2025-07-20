@@ -33,3 +33,13 @@
 .link {
     text-decoration: none;
 }
+
+body {
+    padding-bottom: 4rem;
+}
+
+@media (max-width: 768px) {
+    body {
+        padding-bottom: 10rem;
+    }   
+}

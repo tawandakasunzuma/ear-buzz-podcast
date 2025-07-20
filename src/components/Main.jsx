@@ -38,7 +38,7 @@ export default function Main (props) {
                 <div className="no-podcasts-container">
                 <p className="no-podcasts-text">No podcasts found</p>
                 </div>
-            )}   
+            )}
         </main>
     )
 }

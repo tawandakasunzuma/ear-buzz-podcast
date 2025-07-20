@@ -1,0 +1,122 @@
+/* Section container */
+
+.audio-player-section {
+    padding: 1rem 2rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+    z-index: 1;
+}
+
+/* Left side container */
+
+.left-side-audio-section {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 2rem;
+}
+
+.left-side-audio-section img {
+    width: 35px;
+    opacity: 0.8;
+}
+
+.completion-status {
+    background-color: rgba(255, 165, 0, 0.75);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.5rem;
+    color: rgba(0, 0, 0, 0.7);
+}
+
+/* Center container */
+
+.play-buttons-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+}
+
+.pause-and-play-btn,
+.fast-forward-and-fast-rewind-btn {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pause-and-play-btn img {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    opacity: 0.80;
+    transition: all 600ms ease;
+    background-color: var(--very-light-gray-color);
+}
+
+.fast-forward-and-fast-rewind-btn img {
+    width: 35x;
+    height: 35px;
+    opacity: 0.8;
+    padding: 0.25rem;
+    border-radius: 50%;
+    transition: all 600ms ease;
+}
+
+.pause-and-play-btn img:hover,
+.pause-and-play-btn img:focus {
+    border-color: transparent;
+}
+
+.pause-and-play-btn img:hover,
+.pause-and-play-btn img:focus,
+.fast-forward-and-fast-rewind-btn img:hover,
+.fast-forward-and-fast-rewind-btn img:focus{
+    opacity: 0.5;
+    background-color: var(--medium-gray-color);
+}
+
+.pause-and-play-btn img:active,
+.fast-forward-and-fast-rewind-btn img:active {
+    opacity: 0.25;
+}
+
+/* Progress bar */
+
+.right-side-audio-section {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.progress-bar {
+    width: 75%;
+}
+
+/* Media queries */
+
+@media (max-width: 768px) {
+    .audio-player-section {
+        gap: 1rem;
+        grid-template-columns: 1fr;
+    }
+    .left-side-audio-section,
+    .right-side-audio-section {
+        justify-content: center;
+    }
+    .left-side-audio-section img {
+        display: none;
+    }
+    .progress-bar {
+        width: 65%;
+        min-width: 200px;
+    }
+}
