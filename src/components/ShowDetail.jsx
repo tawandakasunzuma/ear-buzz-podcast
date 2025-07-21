@@ -2,8 +2,9 @@ import he from 'he'
 import { useParams } from "react-router-dom"
 import { useState, useEffect } from "react"
 import '../styles/ShowDetail.css'
-import backIcon from '../assets/images/back-icon.svg'
-import favoriteIcon from '../assets/images/favorite-icon.svg'
+// import backIcon from '../assets/images/back-icon.svg'
+import yellowFavIcon from '../assets/images/yellow-fav-icon.png'
+import emptyFavIcon from '../assets/images/empty-fav-icon.png'
 import calenderIcon from '../assets/images/calender-icon.svg'
 import Seasons from "./Seasons";
 
@@ -16,6 +17,71 @@ export default function ShowDetail () {
 
     // Get ID of card clicked
     const { id } = useParams();
+
+    // Create state for favorites
+    const [isFav,setIsFav] = useState(false);
+
+    useEffect(() => {
+
+        // Get favorites saved in localStorage
+        const storedFavorites = localStorage.getItem("favorites");
+
+        // Create favorites array 
+        let favArray = [];
+
+        try {
+            // Convert stored string into array, or nothing if none found
+            const parsedArray = storedFavorites ? JSON.parse(storedFavorites) : [];
+            // Set array to favorites array if parsedArray is an array, else empty array
+            favArray = Array.isArray(parsedArray) ? parsedArray : [];
+        } catch (error) {
+            // Notify there are invalid favorites
+            console.warn ("Invalid favorites in localStorage",error);
+            favArray = []
+        }
+
+        // Check if current card is in favorites
+        if (cardDetails?.id) {
+            setIsFav(favArray.includes(cardDetails.id));
+        };
+
+    },[cardDetails?.id]);
+
+    /* Add or remove card from favorites */
+    function toggleFav () {
+
+        // Get current favorites
+        const storedFavorites = localStorage.getItem("favorites");
+        // Create favorites array 
+        let favArray = [];
+
+        try {
+            // Convert stored string into array, or nothing if none found
+            const parsedArray = storedFavorites ? JSON.parse(storedFavorites) : [];
+            // Set array to favorites array if parsedArray is an array, else empty array
+            favArray = Array.isArray(parsedArray) ? parsedArray : [];
+        } catch (error) {
+            // Notify there are invalid favorites
+            console.warn ("Invalid favorites in localStorage",error);
+            favArray = []
+        }
+
+        let updatedFavorites;
+
+        if (isFav) {
+            // Remove the card from favorites
+            updatedFavorites = favArray.filter(id => id !== cardDetails.id);
+        } else {
+            // Add the card to favorites
+            updatedFavorites = [...favArray, cardDetails.id];
+        }
+
+        // Save updated list back to localStorage
+        localStorage.setItem('favorites',updatedFavorites);
+
+        // Update the state
+        setIsFav(prev => !prev);
+    }
 
     // Fetch data when card clicked 
     useEffect(() => {
@@ -85,9 +151,14 @@ export default function ShowDetail () {
 
                     {/* Header section*/}
                     <div className="heading-section">
-                        <img className="heading-icon" src={backIcon} alt="Back icon" />
+                        {/*<img className="heading-icon" src={backIcon} alt="Back icon" />*/}
+                        <div></div>
                         <h3 className="podcast-heading-title">{he.decode(cardDetails.title)}</h3>
-                        <img className="heading-icon" src={favoriteIcon} alt="Favorite icon" />
+                        <img 
+                            className="heading-icon" 
+                            src={isFav ? yellowFavIcon : emptyFavIcon} 
+                            alt="Favorite icon" 
+                            onClick={toggleFav}/>
                     </div>
 
                     {/* Main section */}
