@@ -15,7 +15,7 @@ export default function useAudio () {
         
             .then (response => {
                 // If response is not okay, throw an error
-                if (response.ok) throw new Error ("Audio could not be fetched");
+                if (!response.ok) throw new Error ("Audio could not be fetched");
                 // Parse the JSON response
                 return response.json();
             })
@@ -34,5 +34,5 @@ export default function useAudio () {
     },[])
 
     // Return audio reference for later use
-    return audioRef
+    return audioRef;
 }

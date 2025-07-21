@@ -1,9 +1,10 @@
-import { use, useState } from 'react';
+import { useState } from 'react';
 import '../styles/AudioPlayer.css';
 import podcastIcon from '../assets/images/podcast-icon.svg'
-import playIcon from '../assets/images/play-icon.svg';
+// import playIcon from '../assets/images/play-icon.svg';
 import altPlayIcon from '../assets/images/alt-play-icon.svg';
-import pauseIcon from '../assets/images/pause-icon.svg';
+import altPauseIcon from '../assets/images/alt-pause-icon.svg';
+// import pauseIcon from '../assets/images/pause-icon.svg';
 import fastForward from '../assets/images/fast-forward-icon.svg';
 import fastRewind from '../assets/images/fast-rewind-icon.svg';
 import useAudio from '../../hooks/useAudio';
@@ -47,7 +48,7 @@ export default function AudioPlayer () {
                     onClick={togglePlay}
                     className='pause-and-play-btn'>
                         <img 
-                            src={isPlaying ? pauseIcon : altPlayIcon} 
+                            src={isPlaying ? altPauseIcon : altPlayIcon} 
                             alt="playback icon"
                         />
                 </button>

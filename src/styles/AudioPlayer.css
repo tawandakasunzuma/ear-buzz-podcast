@@ -73,12 +73,11 @@
 
 .pause-and-play-btn img:hover,
 .pause-and-play-btn img:focus {
-    border-color: transparent;
-    transform: scale(1.05);
+    transform: scale(1.025);
+    opacity: 0.75;
+    background-color: transparent;
 }
 
-.pause-and-play-btn img:hover,
-.pause-and-play-btn img:focus,
 .fast-forward-and-fast-rewind-btn img:hover,
 .fast-forward-and-fast-rewind-btn img:focus{
     opacity: 0.75;
