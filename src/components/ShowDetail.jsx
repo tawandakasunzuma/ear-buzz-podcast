@@ -8,7 +8,7 @@ import emptyFavIcon from '../assets/images/empty-fav-icon.png'
 import calenderIcon from '../assets/images/calender-icon.svg'
 import Seasons from "./Seasons";
 
-export default function ShowDetail () {
+export default function ShowDetail ({setAudioSrc, audioRef}) {
 
     // Create state for card details, loading and errors
     const [cardDetails, setCardDetails] = useState(null);
@@ -111,6 +111,15 @@ export default function ShowDetail () {
             })
     },[id])
 
+    useEffect(() => {
+        if (cardDetails) {
+            const episode = cardDetails.seasons[0]?.episodes?.[0];
+            if (episode?.file) {
+                setAudioSrc(episode.file);
+            }
+        }
+    },[cardDetails,setAudioSrc])
+
     /**
      * Turns a date string into a human-readable format.
      *
@@ -142,6 +151,17 @@ export default function ShowDetail () {
         ));
     }
     const genreTags = cardDetails?.genres ? createGenreTags(cardDetails.genres) : "-";
+
+    function playEpisode (episode) {
+        if (episode?.file) {
+            setAudioSrc(episode.file);
+            if (audioRef?.current) {
+                audioRef.current.src = episode.file;
+                audioRef.current.load();
+                audioRef.current.play();
+            }
+        }
+    }
 
     return (
         <>
@@ -203,7 +223,10 @@ export default function ShowDetail () {
 
                     {/* Bottom section */}
                     <div className="bottom-section">
-                        <Seasons seasons={cardDetails.seasons} />
+                        <Seasons 
+                            seasons={cardDetails.seasons} 
+                            onEpisodeClick={playEpisode}
+                        />
                     </div>
                 </div>
             }
@@ -228,7 +251,7 @@ export default function ShowDetail () {
                 <div className="no-podcasts-container">
                     <p className="no-podcasts-text">No details available</p>
                 </div>
-            )}   
+            )}
         </>
     )
 }

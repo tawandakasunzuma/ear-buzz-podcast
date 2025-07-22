@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Main from './components/Main';
 import AudioPlayer from "./components/AudioPlayer";
+import useAudio from "../hooks/useAudio.js";
 import ShowDetail from './components/ShowDetail';
 
 import "./styles/App.css"
@@ -19,6 +20,10 @@ export default function App() {
   const [selectedGenre,setSelectedGenre] = useState("All Genres");
   const [sortOrder,setSortOrder] = useState("Newest");
   const [currentPage,setCurrentPage] = useState(1);
+
+  // Audio state
+  const [currentAudioSrc, setCurrentAudioSrc] = useState('');
+  const audioRef = useAudio(currentAudioSrc);
 
   // Set filters and state if it is saved in sessionStorage
   useEffect(() => {
@@ -123,6 +128,8 @@ export default function App() {
   const endIndex = startIndex + podcastsPerPage;
   const paginatedData = processedData.slice(startIndex,endIndex);
 
+
+
   return (
     <>
       
@@ -161,7 +168,7 @@ export default function App() {
         {/* Show details route */}
         <Route
           path='/show/:id'
-          element={<ShowDetail />}
+          element={<ShowDetail setAudioSrc={setCurrentAudioSrc} audioRef={audioRef} />}
         >
         </Route>
       </Routes>
@@ -184,7 +191,8 @@ export default function App() {
         }
 
         {/* Audio player */}
-        <AudioPlayer />
+        <audio ref={audioRef} hidden />
+        <AudioPlayer audioRef={audioRef} />
     </>
   )
 }

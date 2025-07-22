@@ -1,8 +1,10 @@
 import '../styles/Seasons.css'
 import learnMoreIcon from '../assets/images/learn-more-icon.svg'
+import orangeListenIcon from '../assets/images/orange-ear-play.svg'
+
 import { useState } from 'react'
 
-export default function Seasons ({seasons}) {
+export default function Seasons ({seasons, onEpisodeClick}) {
 
     // Create state for opened season
     const [openSeason,setOpenSeason] = useState({})
@@ -66,6 +68,14 @@ export default function Seasons ({seasons}) {
                             </div>
 
                             <div className='bottom-episode'>
+                                {/* Episode play icon */}
+                                <img 
+                                    className='orange-ear-icon'
+                                    src={orangeListenIcon}
+                                    alt="orange ear icon" 
+                                    loading='lazy'
+                                    onClick={() => onEpisodeClick(episode)}
+                                />
                                 {/* Episode image */}
                                 <img
                                     className='episode-image' 
