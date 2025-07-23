@@ -39,30 +39,6 @@
     display: block;
 }
 
-.podcast-image:hover,
-.podcast-image:active {
-    opacity: 0.15;
-}
-
-.podcast-cover-title {
-    display: flex;
-    font-weight: bold;
-    padding: 0 0.5rem;
-    justify-content: center;
-    align-items: center;
-    color: var(--white-color);
-    border-radius: var(--normal-border-radius);
-    text-align: center;
-    background-color: black;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0%;
-    left: 0%;
-    transform: none;
-    box-sizing: border-box;
-}
-
 /* Podcast title */
 
 .podcast-title {

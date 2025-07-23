@@ -76,7 +76,6 @@ export default function Card ({ podcastData, searchLetters, selectedGenre, sortO
                     {/* Image container */}
                     <div className="image-container">
                         <img className="podcast-image" src={podcastData.image} alt={`${decodedTitle} cover image`} loading="lazy" />
-                        <p className="podcast-cover-title">{decodedTitle}</p>
                     </div>
                     
                     {/* Podcast title */}
