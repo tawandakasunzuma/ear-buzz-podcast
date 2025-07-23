@@ -3,7 +3,7 @@ import learnMoreIcon from '../assets/images/learn-more-icon.svg'
 import yellowFavIcon from '../assets/images/yellow-fav-icon.png'
 import playIcon from '../assets/images/play.png'
 import emptyFavIcon from '../assets/images/empty-fav-icon.png'
-import { useFavorites } from '../../hooks/useFavorites.js'
+import { useFavorites } from '../contexts/FavoritesContext';
 import { useState } from 'react'
 
 export default function Seasons({ seasons, onEpisodeClick, showTitle }) {
@@ -41,24 +41,31 @@ export default function Seasons({ seasons, onEpisodeClick, showTitle }) {
 
           {openSeason[si] && (
             <div className="episode-list">
-              {season.episodes.map((episode, index) => {
-                const favourited = isFavourited(episode.id)
-                function toggleFav() {
-                  if (favourited) {
-                    remove(episode.id)
-                  } else {
-                    add({
-                        id: episode.id,
+              {season.episodes.map(episode => {
+                  
+                  const uniqueId = `${showTitle.replace(/\s+/g,'_')}-S${si+1}-E${episode.episode}`;
+                  const favourited = isFavourited(uniqueId);
+
+                  function toggleFav() {
+                    if (favourited) {
+                      remove(uniqueId)
+                    } else {
+                      add({
+                        id: uniqueId,
                         title: episode.title,
                         showTitle,
                         seasonNumber: si + 1,
+                        episodeNumber: episode.episode,
+                        description: episode.description || 'No description available.',
+                        image: season.image || '',
+                        file: episode.file || '',
                         addedAt: new Date().toISOString()
-                    })
+                      });
+                    }
                   }
-                }
 
                 return (
-                  <div key={index} className="episode-item">
+                  <div key={`s${si}-e${episode.episode}`} className="episode-item">
                     <div className="top-episode">
                       <img
                         onClick={toggleFav} 
@@ -70,8 +77,9 @@ export default function Seasons({ seasons, onEpisodeClick, showTitle }) {
                         Episode {episode.episode} – {episode.title}
                       </h5>
                       <p className="episode-description">
-                        {(episode.description?.slice(0, 200) + '…') ||
-                          'No description available…'}
+                        {episode.description
+                          ? episode.description.slice(0, 200) + '…'
+                          : 'No description available…'}
                       </p>
                     </div>
 
