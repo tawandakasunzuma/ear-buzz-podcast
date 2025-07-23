@@ -23,7 +23,6 @@
 }
 
 .seasons-container:hover {
-    border: 2px solid var(--medium-gray-color);
     transform: translateX(4px);
 }
 

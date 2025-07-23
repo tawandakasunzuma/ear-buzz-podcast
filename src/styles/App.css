@@ -24,11 +24,6 @@
     animation: spinnerLoader 1200ms linear infinite;
 }
 
-.loading-text {
-    color: rgba(35, 70, 105, 0.75);
-    font-size: 1rem;
-}
-
 @keyframes spinnerLoader {
     100% {
         transform: rotate(360deg);
