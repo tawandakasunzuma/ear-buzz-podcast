@@ -1,19 +1,17 @@
 import { useEffect, useRef } from 'react';
 
-export default function useAudio (initialSrc = '') {
+export default function useAudio(initialSrc = '') {
+  const audioRef = useRef(new Audio(initialSrc));
 
-    // Create one audio player and keep it between rerenders
-    const audioRef = useRef (new Audio(initialSrc));
+  useEffect(() => {
+    const audio = audioRef.current;
 
-    // Update the audio element when initialSrc changes
-    useEffect (() => {
-        // If audio source is valid update the src
-        if (initialSrc) {
-            audioRef.current.src = initialSrc;
-            audioRef.current.load();
-        };
-    },[initialSrc]);
+    if (initialSrc && audio.src !== initialSrc) {
+      audio.src = initialSrc;
+      audio.load();
+    }
 
-    // Return audio reference to use in my components
-    return audioRef;
+  }, [initialSrc]);
+
+  return audioRef;
 }
