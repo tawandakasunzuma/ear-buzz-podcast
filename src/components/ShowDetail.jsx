@@ -16,23 +16,6 @@ export default function ShowDetail ({ setAudioSrc, setCurrentEpisode }) {
     // Get ID of card clicked
     const { id } = useParams();
 
-    const { add, remove, isFavourited } = useFavorites();
-
-    // Toggle favorite for this show
-    function toggleFav() {
-        if (!cardDetails?.id) return;
-        if (isFavourited(cardDetails.id)) {
-            remove(cardDetails.id);
-        } else {
-            add({
-            id: cardDetails.id,
-            showTitle: cardDetails.title,
-            seasonNumber: 1,
-            addedAt: new Date().toISOString()
-            });
-        }
-    }
-
     // Fetch data when card clicked 
     useEffect(() => {
 
