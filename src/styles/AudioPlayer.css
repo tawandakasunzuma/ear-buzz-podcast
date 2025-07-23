@@ -17,21 +17,31 @@
 
 .left-side-audio-section {
     display: flex;
-    justify-content: flex-start;
     align-items: center;
-    gap: 2rem;
+    gap: 1rem;
+    flex-direction: row;
 }
 
-.left-side-audio-section img {
-    width: 35px;
-    opacity: 0.8;
-}
-
-.completion-status {
-    background-color: rgba(255, 165, 0, 0.75);
-    padding: 0.25rem 0.5rem;
+.audio-player-episode-image {
+    width: 45px;
     border-radius: 0.5rem;
-    color: rgba(0, 0, 0, 0.7);
+}
+
+.audio-player-details-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.audio-player-episode-title {
+    font-size: 0.875rem;
+    font-weight: bold;
+}
+
+.audio-player-podcast-title {
+    font-size: 0.75rem;
+    font-weight: bold;
+    opacity: 0.75;
 }
 
 /* Center container */
@@ -40,7 +50,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 3rem;
+    gap: 2rem;
 }
 
 .pause-and-play-btn,
@@ -63,10 +73,10 @@
 }
 
 .fast-forward-and-fast-rewind-btn img {
-    width: 35px;
-    height: 35px;
+    width: 37.5px;
+    height: 37.5px;
     opacity: 0.8;
-    padding: 0.25rem;
+    padding: 0.5rem;
     border-radius: 50%;
     transition: all 600ms ease;
 }
@@ -89,16 +99,25 @@
     opacity: 0.25;
 }
 
-/* Progress bar */
+/* Right side container */
 
 .right-side-audio-section {
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    gap: 2rem;
 }
 
-.progress-bar {
-    width: 75%;
+.time-stamp {
+    font-size: 0.75rem;
+    font-weight: bold;
+    opacity: 0.75;  
+}
+
+.progress-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 /* Media queries */
@@ -111,12 +130,5 @@
     .left-side-audio-section,
     .right-side-audio-section {
         justify-content: center;
-    }
-    .left-side-audio-section img {
-        display: none;
-    }
-    .progress-bar {
-        width: 65%;
-        min-width: 200px;
     }
 }

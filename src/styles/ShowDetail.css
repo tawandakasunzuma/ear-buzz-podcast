@@ -12,31 +12,8 @@
     Top Section
 =============== */
 
-.heading-section {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-}
-
-.heading-icon {
-    width: 35px;
-    opacity: 0.75;
-    cursor: pointer;
-    padding: 6px;
-    border-radius: 50%;
-    transition: all 300ms ease;
-}
-
-.heading-icon:hover,
-.heading-icon:focus {
-    opacity: 1;
-    background-color: rgba(128, 128, 128, 0.15);
-}
-
-.heading-icon:active {
-    color: white;
-    opacity: 0.25;
+.title-container {
+    text-align: center;
 }
 
 .podcast-heading-title {
@@ -46,6 +23,8 @@
     padding: 0.5rem 1rem;
     border-radius: var(--normal-border-radius);
     box-shadow: 0 2px 8px var(--light-gray-color);
+    display: inline-block;
+    margin: 0 auto;
 }
 
 /* ===============
