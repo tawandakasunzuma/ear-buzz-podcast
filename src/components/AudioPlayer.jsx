@@ -14,29 +14,29 @@ export default function AudioPlayer ({ audioRef, episode }) {
     // State for playback progress
     const [progress,setProgress] = useState(0)
 
-    // Effect to handle audio playback when the episode changes
+    // useEffect to handle audio playback when a new episode is selected
     useEffect(() => {
-      if (!episode) return;
-
       const audio = audioRef.current;
+      if (!episode || !episode.file) return;
 
-      audio.pause();
-      audio.currentTime = 0;
+      audio.pause(); // Stop any current audio
       setIsPlaying(false);
 
-      const playPromise = audio.play();
+      audio.src = episode.file;
+      audio.load();
+      audio.currentTime = 0;
 
+      const playPromise = audio.play();
       if (playPromise !== undefined) {
         playPromise
-          .then(() => {
-            setIsPlaying(true);
-          })
-          .catch((err) => {
+          .then(() => setIsPlaying(true))
+          .catch(err => {
             console.warn("Autoplay blocked:", err);
             setIsPlaying(false);
           });
       }
-    }, [episode,audioRef]);
+    }, [episode, audioRef]);
+
 
     /**
      * Converts a number of seconds into MM:SS format
@@ -93,6 +93,26 @@ export default function AudioPlayer ({ audioRef, episode }) {
       return () => window.removeEventListener('beforeunload', handleBeforeUnload);
     }, [isPlaying, audioRef]);
     
+    // useEffect to track audio playback progress and update the progress bar
+    useEffect(() => {
+      const audio = audioRef.current;
+      if (!audio) return;
+
+      // Update progress as audio plays
+      function updateProgress() {
+        if (audio.duration) {
+          const percent = (audio.currentTime / audio.duration) * 100;
+          setProgress(percent);
+        }
+      }
+
+      // Attach and clean up the event listener
+      audio.addEventListener('timeupdate', updateProgress);
+      return () => {
+        audio.removeEventListener('timeupdate', updateProgress);
+      };
+    }, [audioRef]);
+
     return (
         <div className='audio-player-section'>
 
@@ -146,7 +166,7 @@ export default function AudioPlayer ({ audioRef, episode }) {
               </button>
             </div>
 
-            {/* Right side container */}
+            {/* Right side audio player */}
             { episode?.file && (
                 <div className='right-side-audio-section'>
                     <div className="progress-container">
