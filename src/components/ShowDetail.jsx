@@ -1,14 +1,12 @@
 import he from 'he'
 import { useParams } from "react-router-dom"
 import { useState, useEffect } from "react"
+import { useFavorites } from '../contexts/FavoritesContext';
 import '../styles/ShowDetail.css'
-// import backIcon from '../assets/images/back-icon.svg'
-import yellowFavIcon from '../assets/images/yellow-fav-icon.png'
-import emptyFavIcon from '../assets/images/empty-fav-icon.png'
 import calenderIcon from '../assets/images/calender-icon.svg'
 import Seasons from "./Seasons";
 
-export default function ShowDetail ({setAudioSrc, audioRef}) {
+export default function ShowDetail ({ setAudioSrc, setCurrentEpisode }) {
 
     // Create state for card details, loading and errors
     const [cardDetails, setCardDetails] = useState(null);
@@ -18,69 +16,21 @@ export default function ShowDetail ({setAudioSrc, audioRef}) {
     // Get ID of card clicked
     const { id } = useParams();
 
-    // Create state for favorites
-    const [isFav,setIsFav] = useState(false);
+    const { add, remove, isFavourited } = useFavorites();
 
-    useEffect(() => {
-
-        // Get favorites saved in localStorage
-        const storedFavorites = localStorage.getItem("favorites");
-
-        // Create favorites array 
-        let favArray = [];
-
-        try {
-            // Convert stored string into array, or nothing if none found
-            const parsedArray = storedFavorites ? JSON.parse(storedFavorites) : [];
-            // Set array to favorites array if parsedArray is an array, else empty array
-            favArray = Array.isArray(parsedArray) ? parsedArray : [];
-        } catch (error) {
-            // Notify there are invalid favorites
-            console.warn ("Invalid favorites in localStorage",error);
-            favArray = []
-        }
-
-        // Check if current card is in favorites
-        if (cardDetails?.id) {
-            setIsFav(favArray.includes(cardDetails.id));
-        };
-
-    },[cardDetails?.id]);
-
-    /* Add or remove card from favorites */
-    function toggleFav () {
-
-        // Get current favorites
-        const storedFavorites = localStorage.getItem("favorites");
-        // Create favorites array 
-        let favArray = [];
-
-        try {
-            // Convert stored string into array, or nothing if none found
-            const parsedArray = storedFavorites ? JSON.parse(storedFavorites) : [];
-            // Set array to favorites array if parsedArray is an array, else empty array
-            favArray = Array.isArray(parsedArray) ? parsedArray : [];
-        } catch (error) {
-            // Notify there are invalid favorites
-            console.warn ("Invalid favorites in localStorage",error);
-            favArray = []
-        }
-
-        let updatedFavorites;
-
-        if (isFav) {
-            // Remove the card from favorites
-            updatedFavorites = favArray.filter(id => id !== cardDetails.id);
+    // Toggle favorite for this show
+    function toggleFav() {
+        if (!cardDetails?.id) return;
+        if (isFavourited(cardDetails.id)) {
+            remove(cardDetails.id);
         } else {
-            // Add the card to favorites
-            updatedFavorites = [...favArray, cardDetails.id];
+            add({
+            id: cardDetails.id,
+            showTitle: cardDetails.title,
+            seasonNumber: 1,
+            addedAt: new Date().toISOString()
+            });
         }
-
-        // Save updated list back to localStorage
-        localStorage.setItem('favorites',updatedFavorites);
-
-        // Update the state
-        setIsFav(prev => !prev);
     }
 
     // Fetch data when card clicked 
@@ -110,15 +60,6 @@ export default function ShowDetail ({setAudioSrc, audioRef}) {
                 setLoading(false);
             })
     },[id])
-
-    useEffect(() => {
-        if (cardDetails) {
-            const episode = cardDetails.seasons[0]?.episodes?.[0];
-            if (episode?.file) {
-                setAudioSrc(episode.file);
-            }
-        }
-    },[cardDetails,setAudioSrc])
 
     /**
      * Turns a date string into a human-readable format.
@@ -152,15 +93,16 @@ export default function ShowDetail ({setAudioSrc, audioRef}) {
     }
     const genreTags = cardDetails?.genres ? createGenreTags(cardDetails.genres) : "-";
 
-    function playEpisode (episode) {
-        if (episode?.file) {
-            setAudioSrc(episode.file);
-            if (audioRef?.current) {
-                audioRef.current.src = episode.file;
-                audioRef.current.load();
-                audioRef.current.play();
-            }
-        }
+    function playEpisode(episode) {
+    // Update current episode
+    setCurrentEpisode({
+        ...episode,
+        showTitle: cardDetails.title,
+        image: cardDetails.image
+    });
+
+    // Hand new URL to hook
+    setAudioSrc(episode.file);
     }
 
     return (
@@ -170,17 +112,9 @@ export default function ShowDetail ({setAudioSrc, audioRef}) {
                 <div className="podcast-details">
 
                     {/* Header section*/}
-                    <div className="heading-section">
-                        {/*<img className="heading-icon" src={backIcon} alt="Back icon" />*/}
-                        <div></div>
+                    <div className='title-container'>
                         <h3 className="podcast-heading-title">{he.decode(cardDetails.title)}</h3>
-                        <img 
-                            className="heading-icon" 
-                            src={isFav ? yellowFavIcon : emptyFavIcon} 
-                            alt="Favorite icon" 
-                            onClick={toggleFav}/>
                     </div>
-
                     {/* Main section */}
                     <div className="main-section">
 
@@ -194,7 +128,11 @@ export default function ShowDetail ({setAudioSrc, audioRef}) {
                             {/* Description */}
                             <div className="description-container">
                                 <h4 className="container-heading">Description</h4>
-                                <p className="podcast-description">{cardDetails.description}</p>
+                                <p className="podcast-description">
+                                    {cardDetails.description
+                                        ? cardDetails.description
+                                        : "No description available."}
+                                </p>
                             </div>
 
                             {/* Genres */}
@@ -226,6 +164,7 @@ export default function ShowDetail ({setAudioSrc, audioRef}) {
                         <Seasons 
                             seasons={cardDetails.seasons} 
                             onEpisodeClick={playEpisode}
+                            showTitle={cardDetails.title}
                         />
                     </div>
                 </div>
@@ -235,7 +174,6 @@ export default function ShowDetail ({setAudioSrc, audioRef}) {
             {loading && 
             <div className='loading-container'>
                 <div className='loading-circle'></div>
-                <p className='loading-text'>Loading...</p>
             </div>
             }
 
