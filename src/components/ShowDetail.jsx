@@ -1,7 +1,6 @@
 import he from 'he'
 import { useParams } from "react-router-dom"
 import { useState, useEffect } from "react"
-import { useFavorites } from '../contexts/FavoritesContext';
 import '../styles/ShowDetail.css'
 import calenderIcon from '../assets/images/calender-icon.svg'
 import Seasons from "./Seasons";
