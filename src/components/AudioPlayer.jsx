@@ -6,13 +6,49 @@ import altPauseIcon from '../assets/images/alt-pause-icon.svg';
 import fastForward from '../assets/images/fast-forward-icon.svg';
 import fastRewind from '../assets/images/fast-rewind-icon.svg';
 
-export default function AudioPlayer ({audioRef}) {
+export default function AudioPlayer ({ audioRef, episode }) {
 
     // State to track where audio is playing or not
     const [isPlaying,setIsPlaying] = useState (false);
 
     // State for playback progress
     const [progress,setProgress] = useState(0)
+
+    // Effect to handle audio playback when the episode changes
+    useEffect(() => {
+      if (!episode) return;
+
+      const audio = audioRef.current;
+
+      audio.pause();
+      audio.currentTime = 0;
+      setIsPlaying(false);
+
+      const playPromise = audio.play();
+
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            setIsPlaying(true);
+          })
+          .catch((err) => {
+            console.warn("Autoplay blocked:", err);
+            setIsPlaying(false);
+          });
+      }
+    }, [episode,audioRef]);
+
+    /**
+     * Converts a number of seconds into MM:SS format
+     *
+     * @param {number} [sec=0] - Time in seconds.
+     * @returns {string} Formatted time string in MM:SS format.
+    */
+    function formatTime(sec = 0) {
+        const m = Math.floor(sec / 60).toString().padStart(2, '0')
+        const s = Math.floor(sec % 60).toString().padStart(2, '0')
+        return `${m}:${s}`
+    }
 
     /**
      * 
@@ -28,9 +64,10 @@ export default function AudioPlayer ({audioRef}) {
     }
 
     /**
-     * 
-     * @param {*} offset 
-     */
+     * Seeks the audio playback by a given number of seconds
+     *
+     * @param {number} offset - The number of seconds to move forward or backward.
+    */
     function seek(offset) {
       const audio = audioRef.current;
       if (audio && audio.src) {
@@ -38,84 +75,100 @@ export default function AudioPlayer ({audioRef}) {
       }
     }
 
-    // update `progress` on every timeupdate event
+    // Warn the user before leaving the page if audio is playing
     useEffect(() => {
-      const audio = audioRef.current;
-      function onTimeUpdate() {
-        if (audio.duration) {
-          setProgress((audio.currentTime / audio.duration) * 100);
+      // Handler for the browser's beforeunload event
+      const handleBeforeUnload = (e) => {
+        if (isPlaying && audioRef.current?.src) {
+          e.preventDefault();
+          // Show a confirmation message to prevent accidental leaving
+          e.returnValue = 'Are you sure you want to leave? Your audio will stop.';
         }
-      }
-      audio.addEventListener('timeupdate', onTimeUpdate);
-      return () => audio.removeEventListener('timeupdate', onTimeUpdate);
-    }, [audioRef]);
+      };
 
-    useEffect(() => {
-        const handleBeforeUnload = (e) => {
-            if (isPlaying && audioRef.current?.src) {
-                e.preventDefault();
-                e.returnValue = 'Are you sure you want to leave? Your audio will stop.';
-            }
-        };
+      // Add event listener when component mounts or dependencies change
+      window.addEventListener('beforeunload', handleBeforeUnload);
 
-        window.addEventListener('beforeunload', handleBeforeUnload);
-        return () => window.removeEventListener('beforeunload', handleBeforeUnload);
+      // Clean up the event listener on unmount or dependency change
+      return () => window.removeEventListener('beforeunload', handleBeforeUnload);
     }, [isPlaying, audioRef]);
-
     
     return (
         <div className='audio-player-section'>
 
-            {/* Left side of audio player */}
+            {/* Left side: actual episode details */}
             <div className='left-side-audio-section'>
-                <img src={podcastIcon} alt="podcast icon" />
-                <p className='completion-status'>Completed</p>
+              <img
+                className='audio-player-episode-image'
+                src={episode?.image || podcastIcon}
+                alt={episode?.title || ''}
+              />
+              <div className='audio-player-details-container'>
+                <h4 className='audio-player-episode-title'>
+                  {episode?.title || 'No episode selected'}
+                </h4>
+                <p className='audio-player-podcast-title'>
+                  {episode?.showTitle || 'Podcast App'}
+                </p>
+              </div>
             </div>
 
             {/* Middle of audio player */}
             <div className='play-buttons-container'>
-                <button 
-                    aria-label="Rewind 10 seconds"
-                    className='fast-forward-and-fast-rewind-btn'
-                    onClick={() => seek(-10)}
-                >
-                    <img 
-                        src={fastRewind} 
-                        alt="fast rewind icon" 
-                    />
-                </button>
-                <button 
-                    aria-label={isPlaying ? "Pause audio" : "Play audio"}
-                    onClick={togglePlay}
-                    className='pause-and-play-btn'>
-                        <img 
-                            src={isPlaying ? altPauseIcon : altPlayIcon} 
-                            alt="playback icon"
-                        />
-                </button>
-                <button 
-                    aria-label="Fast forward 10 seconds"
-                    className='fast-forward-and-fast-rewind-btn'
-                    onClick={() => seek(10)}
-                >
-                    <img src={fastForward} alt="fast forward icon" />
-                </button>
+              {/* Rewind button */}
+              <button 
+                  aria-label="Rewind 10 seconds"
+                  className='fast-forward-and-fast-rewind-btn'
+                  onClick={() => seek(-10)}
+              >
+                  <img 
+                      src={fastRewind} 
+                      alt="fast rewind icon" 
+                  />
+              </button>
+              {/* Play/Pause button */}
+              <button 
+                  aria-label={isPlaying ? "Pause audio" : "Play audio"}
+                  onClick={togglePlay}
+                  className='pause-and-play-btn'>
+                      <img 
+                          src={isPlaying ? altPauseIcon : altPlayIcon} 
+                          alt="playback icon"
+                      />
+              </button>
+              {/* Fast forward button */}
+              <button 
+                  aria-label="Fast forward 10 seconds"
+                  className='fast-forward-and-fast-rewind-btn'
+                  onClick={() => seek(10)}
+              >
+                  <img src={fastForward} alt="fast forward icon" />
+              </button>
             </div>
 
-            {/* Right side of audio player */}
-            <div className='right-side-audio-section'>
-                <input 
-                    type="range" 
-                    className='progress-bar' 
-                    min="0"
-                    max="100"
-                    value={progress}
-                    onChange={event => {
-                        const percentage = event.target.value
-                        audioRef.current.currentTime = (percentage / 100) * audioRef.current.duration;
-                    }}
-                />
-            </div>
+            {/* Right side container */}
+            { episode?.file && (
+                <div className='right-side-audio-section'>
+                    <div className="progress-container">
+                        <p className='time-stamp'>
+                            {formatTime(audioRef.current?.currentTime)}
+                        </p>
+                        <input
+                            type="range"
+                            min="0"
+                            max="100"
+                            value={progress}
+                            onChange={e => {
+                            const percentage = e.target.value;
+                            audioRef.current.currentTime = (percentage/100) * audioRef.current.duration;
+                            }}
+                        />
+                        <p className='time-stamp'>
+                            {formatTime(audioRef.current?.duration)}
+                        </p>
+                    </div>
+                </div>
+            )}
 
         </div>
     )
