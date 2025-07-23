@@ -5,151 +5,145 @@ import Main from './components/Main';
 import AudioPlayer from "./components/AudioPlayer";
 import useAudio from "../hooks/useAudio.js";
 import ShowDetail from './components/ShowDetail';
-
-import "./styles/App.css"
+import Favorites from './components/Favorites';
+import "./styles/App.css";
 
 export default function App() {
-
-  // State for fetch logic
-  const [podcastData,setPodcastData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [hasError,setHasError] = useState(false);
-
-  // State for search, filter, sort, page state
-  const [searchLetters,setSearchLetters] = useState("");
-  const [selectedGenre,setSelectedGenre] = useState("All Genres");
-  const [sortOrder,setSortOrder] = useState("Newest");
-  const [currentPage,setCurrentPage] = useState(1);
-
-  // Audio state
+  // =========================
+  // 🎧 AUDIO & EPISODE STATE
+  // =========================
   const [currentAudioSrc, setCurrentAudioSrc] = useState('');
-  const audioRef = useAudio(currentAudioSrc);
+  const [currentEpisode, setCurrentEpisode] = useState(null);
+  const audioRef = useAudio(currentAudioSrc); // custom hook to handle play/pause/reset
 
-  // Set filters and state if it is saved in sessionStorage
+  // ===============================
+  // 📡 DATA FETCHING STATE
+  // ===============================
+  const [podcastData, setPodcastData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
+
+  // ===============================
+  // 🔍 SEARCH / FILTER / SORT STATE
+  // ===============================
+  const [searchLetters, setSearchLetters] = useState("");
+  const [selectedGenre, setSelectedGenre] = useState("All Genres");
+  const [sortOrder, setSortOrder] = useState("Newest");
+
+  // ===============================
+  // 📄 PAGINATION STATE
+  // ===============================
+  const [currentPage, setCurrentPage] = useState(1);
+  const podcastsPerPage = 12;
+
+  // ===================================================
+  // 🧠 LOAD SESSION DATA (for filters + page restore)
+  // ===================================================
   useEffect(() => {
-  
     const savedSearch = sessionStorage.getItem('searchLetters');
-    if (savedSearch !== null && savedSearch !== "undefined") {
-      setSearchLetters(savedSearch);
-    }
+    if (savedSearch && savedSearch !== "undefined") setSearchLetters(savedSearch);
 
     const savedGenre = sessionStorage.getItem('selectedGenre');
-    if (savedGenre !== null && savedGenre !== "undefined") {
-      setSelectedGenre(savedGenre);
-    }
+    if (savedGenre && savedGenre !== "undefined") setSelectedGenre(savedGenre);
 
     const savedSort = sessionStorage.getItem('sortOrder');
-    if (savedSort !== null && savedSort !== "undefined") {
-      setSortOrder(savedSort);
-    }
+    if (savedSort && savedSort !== "undefined") setSortOrder(savedSort);
 
-    const savedPage = sessionStorage.getItem('currentPage');
-    const pageNum = Number(savedPage);
-    setCurrentPage(pageNum);
+    const savedPage = Number(sessionStorage.getItem('currentPage'));
+    if (!isNaN(savedPage)) setCurrentPage(savedPage);
   }, []);
 
+  // ================================
+  // 🛰️ FETCH PODCAST DATA FROM API
+  // ================================
   useEffect(() => {
-
-    //Fetch data from API
     fetch("https://podcast-api.netlify.app/shows")
-
-      // If response is OK, parse from JSON into a JS object
       .then(response => {
         if (!response.ok) throw new Error("Data failed to be fetched");
         return response.json();
       })
-
-      // Set podcast data to data fetched
       .then(data => {
         setPodcastData(data);
       })
-  
-      // Show error in console and on the UI
       .catch(error => {
-        console.error("Error:", error);
+        console.error("Error fetching data:", error);
         setHasError(true);
       })
-  
-      // Stop loading
       .finally(() => {
-        setLoading(false)
-      })
-  },[])
+        setLoading(false);
+      });
+  }, []);
 
-  // Filter by title in search bar
-  let filteredData = podcastData.filter(podcast => (
+  // ===============================
+  // 🔍 FILTER PODCASTS BY SEARCH
+  // ===============================
+  let filteredData = podcastData.filter(podcast =>
     podcast.title.toLowerCase().includes(searchLetters.toLowerCase())
-  ));
+  );
 
-  // Go back to page 1 when letters typed
+  // ⬅️ Reset to first page on new search
   useEffect(() => {
-    setCurrentPage(1)
-  },[searchLetters]);
+    setCurrentPage(1);
+  }, [searchLetters]);
 
-  // Filter by genre
+  // 🎭 Filter by genre
   if (selectedGenre !== "All Genres") {
     const genreId = Number(selectedGenre);
-    filteredData = filteredData.filter(podcast => (
+    filteredData = filteredData.filter(podcast =>
       podcast.genres.includes(genreId)
-    ))
+    );
   }
 
-  // Sort in order
-  filteredData.sort((a,b) => {
-    if (sortOrder === "Newest") {
-      return new Date (b.updated) - new Date(a.updated);
-    } else if (sortOrder === "Oldest") {
-      return new Date (a.updated) - new Date(b.updated);
-    } else if (sortOrder === "TitleAsc") {
-      return a.title.localeCompare(b.title);      
-    } else if (sortOrder === "TitleDesc") {
-      return b.title.localeCompare(a.title);
+  // ⬇️ Sort by selected order
+  filteredData.sort((a, b) => {
+    switch (sortOrder) {
+      case "Newest":
+        return new Date(b.updated) - new Date(a.updated);
+      case "Oldest":
+        return new Date(a.updated) - new Date(b.updated);
+      case "TitleAsc":
+        return a.title.localeCompare(b.title);
+      case "TitleDesc":
+        return b.title.localeCompare(a.title);
+      default:
+        return 0;
     }
   });
-  
-  // Podcasts displayed per page
-  const podcastsPerPage = 12;
-  
-  // Copy of filtered list
-  const processedData = [...filteredData];
 
-  // How may pages we need
-  const totalPages = Math.ceil(processedData.length / podcastsPerPage);
+  // ====================================
+  // 📄 PAGINATION - CURRENT PAGE SETUP
+  // ====================================
+  const totalPages = Math.ceil(filteredData.length / podcastsPerPage);
 
-  // Reset page back to Page 1 after changes
   useEffect(() => {
     if (currentPage > totalPages) {
       setCurrentPage(1);
     }
-  },[totalPages,currentPage])
+  }, [totalPages, currentPage]);
 
-  // Get podcasts for current page
   const startIndex = (currentPage - 1) * podcastsPerPage;
-  const endIndex = startIndex + podcastsPerPage;
-  const paginatedData = processedData.slice(startIndex,endIndex);
+  const paginatedData = filteredData.slice(startIndex, startIndex + podcastsPerPage);
 
-
-
+  // ================================
+  // 🎬 RENDER JSX
+  // ================================
   return (
     <>
-      
-        <Header 
-          searchLetters={searchLetters} 
-          setSearchLetters={setSearchLetters}
-        />
-        
-        <Routes>
+      <Header
+        searchLetters={searchLetters}
+        setSearchLetters={setSearchLetters}
+      />
 
-        {/* Homepage route */}
-        <Route 
-          path='/' 
+      <Routes>
+        {/* Home route with podcast grid */}
+        <Route
+          path="/"
           element={
-            <Main 
+            <Main
               podcastData={paginatedData}
               loading={loading}
 
               searchLetters={searchLetters}
-
               selectedGenre={selectedGenre}
               setSelectedGenre={setSelectedGenre}
               sortOrder={sortOrder}
@@ -157,42 +151,48 @@ export default function App() {
 
               currentPage={currentPage}
               setCurrentPage={setCurrentPage}
-
               podcastsPerPage={podcastsPerPage}
               totalPages={totalPages}
             />
           }
-        >
-        </Route>
+        />
 
-        {/* Show details route */}
+        {/* Show detail route */}
         <Route
-          path='/show/:id'
-          element={<ShowDetail setAudioSrc={setCurrentAudioSrc} audioRef={audioRef} />}
-        >
-        </Route>
+          path="/show/:id"
+          element={
+            <ShowDetail
+              setAudioSrc={setCurrentAudioSrc}
+              setCurrentEpisode={setCurrentEpisode}
+              audioRef={audioRef}
+            />
+          }
+        />
+
+        {/* Favorites page */}
+        <Route
+          path="/favorites"
+          element={<Favorites />}
+        />
       </Routes>
 
-        {/* Show error if no data fetched */}
-        {hasError && 
-          <div className='error-container'>
-            <p className='error-msg'>
-              Data could not be fetched
-            </p>
-          </div>
-        }
+      {/* Error message if fetch fails */}
+      {hasError &&
+        <div className='error-container'>
+          <p className='error-msg'>Data could not be fetched</p>
+        </div>
+      }
 
-        {/* Show loading info */}
-        {loading && 
-          <div className='loading-container'>
-            <div className='loading-circle'></div>
-            <p className='loading-text'>Loading...</p>
-          </div>
-        }
+      {/* Loading screen */}
+      {loading &&
+        <div className='loading-container'>
+          <div className='loading-circle'></div>
+          <p className='loading-text'>Loading...</p>
+        </div>
+      }
 
-        {/* Audio player */}
-        <audio ref={audioRef} hidden />
-        <AudioPlayer audioRef={audioRef} />
+      {/* Global audio player at bottom */}
+      <AudioPlayer audioRef={audioRef} episode={currentEpisode} />
     </>
-  )
+  );
 }
