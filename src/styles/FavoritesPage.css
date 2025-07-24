@@ -86,8 +86,8 @@ html[data-theme="dark"] .fav-podcast-icon {
 }
 
 .fav-icon {
-    width: 22.5px;
-    opacity: 0.75;
+    width: 25px;
+    opacity: 0.875;
     cursor: pointer;
     padding: 4px;
     border-radius: 50%;
@@ -97,7 +97,8 @@ html[data-theme="dark"] .fav-podcast-icon {
 .fav-icon:hover,
 .fav-icon:focus {
     opacity: 1;
-    background-color: var(--light-gray-color);
+    transform: scale(1.2);
+    background-color: rgba(255, 0, 0, 0.125);
 }
 
 .fav-icon:active {
@@ -109,7 +110,7 @@ html[data-theme="dark"] .fav-podcast-icon {
   width: 35px;
   height: auto;
   cursor: pointer;
-  opacity: 0.75;
+  opacity: 0.875;
   transition: all 600ms ease;
 }
 
@@ -120,12 +121,10 @@ html[data-theme="dark"] .fav-podcast-icon {
   align-items: center;
 }
 
-.fav-icon:hover,
-.fav-icon:focus,
 .fav-play-btn:hover,
 .fav-play-btn:active {
   opacity: 1;
-  transform: scale(1.075);
+  transform: scale(1.0125);
 }
 
 .fav-icon:active,

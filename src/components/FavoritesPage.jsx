@@ -3,7 +3,7 @@ import { useFavorites } from '../contexts/FavoritesContext';
 import he from 'he';
 import "../styles/FavoritesPage.css";
 import podcastIcon from '../assets/images/podcast-icon.svg'
-import yellowFavIcon from '../assets/images/yellow-fav-icon.png'
+import deleteIcon from '../assets/images/delete-icon.svg'
 import playIcon from '../assets/images/play.png'
 
 export default function FavoritesPage({ setAudioSrc, setCurrentEpisode }) {
@@ -167,7 +167,7 @@ export default function FavoritesPage({ setAudioSrc, setCurrentEpisode }) {
                 <div className="fav-right-side">
                   <img 
                     className="fav-icon" 
-                    src={yellowFavIcon} 
+                    src={deleteIcon} 
                     alt="Remove favorite"
                     onClick={() => handleRemove(fav.id)} />
                   <img 
