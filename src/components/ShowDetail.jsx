@@ -118,12 +118,14 @@ export default function ShowDetail ({ setAudioSrc, setCurrentEpisode }) {
                             </div>
 
                             {/* Genres */}
-                            <div className="genre-container">
-                                <h4 className="container-heading">Genres</h4>
-                                <div className="podcast-genre-container">
-                                    {genreTags}
+                            {cardDetails?.genres && (
+                                <div className="genre-container">
+                                    <h4 className="container-heading">Genres</h4>
+                                    <div className="podcast-genre-container">
+                                        {genreTags}
+                                    </div>
                                 </div>
-                            </div>
+                            )}
 
                             {/* Last updated */}
                             <div className="last-updated-container">

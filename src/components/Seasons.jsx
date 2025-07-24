@@ -62,7 +62,7 @@ export default function Seasons({ seasons, onEpisodeClick, showTitle }) {
                         showTitle,
                         seasonNumber: si + 1,
                         episodeNumber: episode.episode,
-                        description: episode.description || 'No description available.',
+                        description: episode.description || '',
                         image: season.image || '',
                         file: episode.file || '',
                         addedAt: new Date().toISOString()
@@ -85,7 +85,7 @@ export default function Seasons({ seasons, onEpisodeClick, showTitle }) {
                       <p className="episode-description">
                         {episode.description
                           ? episode.description.slice(0, 200) + '…'
-                          : 'No description available…'}
+                          : ''}
                       </p>
                     </div>
 

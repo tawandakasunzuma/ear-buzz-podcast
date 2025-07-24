@@ -93,7 +93,7 @@ html[data-theme="dark"] .season-length {
     gap: 1rem;
 }
 
-.top-episode ,
+.top-episode,
 .bottom-episode {
     display: flex;
     align-items: center;
@@ -168,6 +168,13 @@ html[data-theme="dark"] .season-length {
     .seasons-container {
         gap: 0.5rem;
         flex-wrap: wrap;
+    }
+    .episode-item {
+        border: 2px solid red;
+        flex-direction: column;
+    }
+    .top-episode {
+        flex-direction: column;
     }
 }
 

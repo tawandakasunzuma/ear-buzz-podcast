@@ -1,5 +1,5 @@
 .recommended-carousel {
-    padding: 2rem var(--large-padding) 1rem var(--large-padding);
+    padding: 2rem var(--large-padding) 0.5rem var(--large-padding);
     background-color: var(--very-light-gray-color);
 }
 

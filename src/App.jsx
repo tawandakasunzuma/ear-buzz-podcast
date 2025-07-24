@@ -153,25 +153,29 @@ export default function App() {
           path="/"
           element={
             <>
+              {!loading && (
               <RecommendedCarousel 
                 recommendedShows={recommendedShows}
               />
-              <Main
-                podcastData={paginatedData}
-                loading={loading}
-                hasError={hasError}
+              )}
+              {!loading && (
+                <Main
+                  podcastData={paginatedData}
+                  loading={loading}
+                  hasError={hasError}
 
-                searchLetters={searchLetters}
-                selectedGenre={selectedGenre}
-                setSelectedGenre={setSelectedGenre}
-                sortOrder={sortOrder}
-                setSortOrder={setSortOrder}
+                  searchLetters={searchLetters}
+                  selectedGenre={selectedGenre}
+                  setSelectedGenre={setSelectedGenre}
+                  sortOrder={sortOrder}
+                  setSortOrder={setSortOrder}
 
-                currentPage={currentPage}
-                setCurrentPage={setCurrentPage}
-                podcastsPerPage={podcastsPerPage}
-                totalPages={totalPages}
-              />
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                  podcastsPerPage={podcastsPerPage}
+                  totalPages={totalPages}
+                />
+              )}
             </>
           }
         />

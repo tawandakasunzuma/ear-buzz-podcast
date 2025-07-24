@@ -96,6 +96,10 @@
     box-shadow: 0 -2px 2px var(--very-light-gray-color);
 }
 
+html[data-theme="dark"] .podcast-genre-item {
+    background-image: linear-gradient( var(--light-gray-color), var(--white-color));
+}
+
 .calender-container {
     display: flex;
     align-items: center;

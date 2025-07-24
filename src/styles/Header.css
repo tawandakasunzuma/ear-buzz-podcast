@@ -46,7 +46,10 @@ html[data-theme="dark"] .icon-3 {
 }
 
 .app-name {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
+    letter-spacing: 4px;
+    font-family: "Alumni Sans SC", sans-serif;
+    margin-left: 0.5rem;
 }
 
 .search-bar {
