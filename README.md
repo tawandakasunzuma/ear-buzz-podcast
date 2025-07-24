@@ -1,104 +1,211 @@
-# 🎧 DJS Portfolio Piece – Podcast App (React)
+# 🎧 Podcast App
 
-## 📋 Overview
+> A polished React podcast application featuring global audio playback, episode favouriting, a recommended shows carousel, and light/dark theme support.
 
-In this final phase, you will enhance the podcast app you've been building throughout the DJS course. The app already includes a landing page with searchable, sortable, and filterable podcast previews, as well as a show detail page with season toggling.
+🌐 [Live Demo on Vercel](https://ear-buzz-podcast.vercel.app/)
 
-This project introduces key new features including global audio playback, favouriting episodes, deployment best practices, UI enhancements, and optional listening progress tracking.
-
-Your goal is to build a polished, production-ready React application that offers an engaging and seamless user experience.
-
-> **Tip:** You are encouraged to explore the React ecosystem to help implement features efficiently.
-
-## 🎯 Objectives
-
-- Implement a global audio player with full playback control
-- Add support for favouriting episodes with persistent storage
-- Introduce a recommended shows carousel on the landing page
-- Support theme toggling (light/dark mode)
-- Ensure robust routing and deploy the app with professional polish
-- Optionally track listening progress across episodes and sessions
-
-## 🚀 Core Features & User Stories
-
-### 🛠️ Setup and Deployment
-
-- Deploy your app to **Vercel** using a **custom domain or URL**
-- Add a **custom favicon** for easy identification in browser tabs
-- Use tools like [metatags.io](https://metatags.io) to set **rich social media preview metadata**
-- Ensure that direct access to dynamic routes (e.g. `/show/1`) works correctly (SPA routing fallback)
-
-### 🔊 Global Audio Player
-
-- Play audio using the provided **placeholder API**
-- Keep the player **fixed at the bottom** of the screen across all pages
-- Ensure **uninterrupted playback** when navigating between pages
-- Provide **play, pause, seek, and progress tracking**
-- Add a **confirmation prompt** on page reloads during playback
-
-### ❤️ Favourites
-
-- Allow users to **favourite or unfavourite episodes** via a button/icon
-- Use **localStorage** to persist favourites across sessions
-- Provide **visual feedback** for favourited items (e.g., filled heart)
-- Create a **favourites page** displaying all saved episodes
-- Display **associated show and season** for each favourite
-- Show the **date/time added** to favourites
-- **Group favourites by show title**
-- Add **sorting options**:
-  - A–Z / Z–A by title
-  - Newest / Oldest by date added
-
-### 🎠 Recommended Shows Carousel
-
-- Add a **horizontally scrollable carousel** to the landing page
-- Show each show’s **image, title, and genre tags**
-- Support **looping** and navigation via **swipe or arrows**
-- Clicking a carousel item should navigate to the **show’s detail page**
-
-### 🌗 Theme Toggle
-
-- Include a **toggle** for switching between light and dark mode
-- **Persist theme selection** using `localStorage`
-- Ensure the **entire app UI updates smoothly**
-- Use **appropriate icons** (e.g., sun/moon) to indicate current theme
-- Reflect selected theme across all views and components
-
-## 🌟 Stretch Goal – Listening Progress (Optional)
-
-- Save playback position per episode and **resume playback**
-- Mark episodes as **"finished"** once fully played
-- Display **progress indicators** for episodes in progress
-- Allow users to **reset listening history**
-- Save listening history in local storage
-
-## ✅ Deliverables
-
-- A fully functional and deployed podcast app
-- Source code in **GitHub** with clear commit history
-- Live demo link (**Vercel**)
-- (Optional) Short demo video
-
-## 💡 Tips
-
-- Prioritise **user experience** and **clean component structure**
-- Use **React best practices** (components, hooks, state management)
-- Ensure the app is **responsive** and **mobile-friendly**
-- Test localStorage and audio persistence thoroughly
-- Make use of the **React ecosystem** to accelerate development!
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)  
+[![GitHub Stars](https://img.shields.io/github/stars/tawandakasunzuma/podcast-app?style=social)](https://github.com/tawandakasunzuma/podcast-app/stargazers)  
+[![GitHub Issues](https://img.shields.io/github/issues/tawandakasunzuma/podcast-app)](https://github.com/tawandakasunzuma/podcast-app/issues)
 
 ---
 
-## 🧑‍⚖️ Panel Review
+## 📝 Overview
 
-After submitting your project, you will be required to present your work to a coach or panel of coaches.
+**Podcast App** is a beginner‑level React project built for university. It enables users to:
 
-During this session, you must:
+- 🔍 Browse, search, and filter podcast shows
+- 🔊 Play episodes with a **global audio player** that persists across pages
+- ❤️ Mark episodes as **favourites** and view them on a dedicated page
+- 🎠 Discover new content via a **recommended shows carousel**
+- 🌗 Switch between **light & dark themes**, with preference saved in `localStorage`
 
-- **Demonstrate** all the features you have implemented in your application.
-- **Explain** how each feature was built, referring directly to your code (e.g., components, state, hooks, storage).
-- Discuss the **decisions** you made during development (e.g., choice of libraries, structure, naming conventions).
-- Break down the **logic** behind key functionalities (e.g., how audio persistence or favouriting works).
-- Be prepared to answer **questions** from the coaches about your project, code structure, and implementation choices.
+---
 
-This is your opportunity to showcase both your technical and problem-solving skills—treat it like a real-world project revsiew.
+## 🧰 Tech Stack
+
+- **React** (v18)
+- **React Router** (v6)
+- **CSS** (normal CSS for styling)
+- **LocalStorage** (favourites & theme persistence)
+- **Vercel** (deployment)
+
+---
+
+## 🚀 Key Features
+
+- **Global Audio Player**
+
+  - Fixed at bottom, play/pause, seek, and progress tracking
+  - Prompts on reload/close while playing
+
+- **Episode Favourites**
+
+  - Click heart icon to add/remove favourites
+  - Favourites page grouped by show, sortable by title or date added
+
+- **Recommended Shows Carousel**
+
+  - Horizontally scrollable & looping
+  - Displays show image, title, and genre tags
+  - Click to navigate to show detail
+
+- **Theme Toggle**
+  - Light/dark switch with ☀️/🌙 icons
+  - Preference stored in `localStorage`
+
+---
+
+## 🛠️ Getting Started
+
+### Prerequisites
+
+- Node.js v14+
+- npm or Yarn
+
+### Installation
+
+1. **Clone the repo**
+
+   ```bash
+   git clone https://github.com/tawandakasunzuma/podcast-app.git
+   cd podcast-app
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+
+3. **Configure environment variables**
+
+   Create a `.env.local` file in the root directory and add your API base URL:
+
+   ```env
+   REACT_APP_API_BASE_URL=https://api.example.com/episodes
+   ```
+
+4. **Run the app locally**
+
+   ```bash
+   npm start
+   # or
+   yarn start
+   ```
+
+5. **Build for production**
+
+   ```bash
+   npm run build
+   # or
+   yarn build
+   ```
+
+---
+
+## 💡 Usage Guide
+
+Once the app is running, here’s how to use the key features:
+
+### 🔊 Global Audio Player
+
+- The player is fixed at the bottom of the screen.
+- It remains active and continues playback across all pages.
+- Includes controls for play, pause, seek, and displays current progress.
+- A confirmation prompt appears if the user tries to reload or close the page while audio is playing.
+
+### ❤️ Favouriting Episodes
+
+- Click the heart icon to mark or unmark an episode as a favourite.
+- Favourites are saved in `localStorage` and persist across sessions.
+- Visit the **Favourites** page to see saved episodes, grouped by show.
+- Episodes can be sorted by title or date added.
+
+### 🎠 Recommended Shows Carousel
+
+- A horizontally scrollable carousel appears on the home page.
+- Each card displays a show’s image, title, and genre tags.
+- Use swipe or arrow controls to browse.
+- Clicking a show navigates to its detail page.
+
+### 🌗 Theme Toggle
+
+- Use the toggle in the header to switch between light and dark mode.
+- Your preference is saved in `localStorage` and applied across the app.
+
+---
+
+## 🚀 Deployment
+
+This project is ready for deployment using **Vercel**.
+
+### Steps to Deploy:
+
+1. **Push your code to GitHub**  
+   Make sure your latest code is committed and pushed to a GitHub repository.
+
+2. **Connect to Vercel**
+
+   - Go to [vercel.com](https://vercel.com)
+   - Sign in with GitHub and import your repository.
+
+3. **Set environment variables**  
+   In the Vercel dashboard, add the same variables from your `.env.local` file to your project settings.
+
+4. **Configure your build settings (optional)**  
+   Vercel usually auto-detects the correct settings:
+
+   - Framework: React
+   - Build Command: `npm run build`
+   - Output Directory: `build`
+
+5. **Add a custom domain (optional)**  
+   You can configure a custom domain or use the default Vercel URL.
+
+6. **Enable SPA routing fallback**  
+   Add a `vercel.json` file in the root of your project:
+
+   ```json
+   {
+     "rewrites": [{ "source": "/(.*)", "destination": "/" }]
+   }
+   ```
+
+7. **Add social media preview metadata**  
+   Use a tool like [metatags.io](https://metatags.io) to generate Open Graph and Twitter Card tags.  
+   Paste the tags into your `public/index.html` inside the `<head>`.
+
+---
+
+## 🗂 Project Structure
+
+podcast-app/
+├── public/
+│ ├── favicon.ico
+│ └── index.html
+├── src/
+│ ├── assets/
+│ ├── components/
+│ ├── hooks/
+│ ├── pages/
+│ ├── styles/
+│ ├── App.jsx
+│ └── index.js
+├── .env.local
+├── package.json
+└── README.md
+
+Let me know if you'd like the **License**, **Contributing**, or **Contact** section next.
+
+---
+
+## 📬 Contact
+
+For feedback, questions, or collaboration opportunities:
+
+**Tawanda Kasunzuma**  
+📧 [tskasunzuma@gmail.com](mailto:tskasunzuma@gmail.com)  
+🔗 [GitHub Profile](https://github.com/tawandakasunzuma)
