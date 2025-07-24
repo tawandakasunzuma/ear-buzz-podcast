@@ -41,7 +41,7 @@
   --medium-blue-color: rgba(120, 160, 255, 0.4);
   --dark-blue-color: rgba(120, 160, 255, 0.8);
 
-  --audio-player-color: rgba(10, 0, 10, 0.95);
+  --audio-player-color: rgba(0, 0, 0, 0.875);
 }
 
 /* Smooth transitions */

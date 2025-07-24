@@ -172,3 +172,15 @@ html[data-theme="dark"] .no-podcasts-text {
   color: var(--very-dark-gray-color);
   opacity: 0.25;
 }
+
+@media (max-width: 480px) {
+  .fav-item {
+    flex-direction: column;
+  }
+  .fav-left-side {
+    flex-direction: column;
+  }
+  .fav-right-side {
+    flex-direction: row;
+  }
+}
