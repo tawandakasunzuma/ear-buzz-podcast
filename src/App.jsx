@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo  } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';  
 import useAudio from '../hooks/useAudio.js';
@@ -7,6 +7,7 @@ import Main from './components/Main';
 import AudioPlayer from "./components/AudioPlayer";
 import ShowDetail from './components/ShowDetail';
 import FavoritesPage from './components/FavoritesPage';
+import RecommendedCarousel from './components/RecommendedCarousel.jsx';
 import "./styles/App.css";
 
 export default function App() {
@@ -126,6 +127,16 @@ export default function App() {
   const startIndex = (currentPage - 1) * podcastsPerPage;
   const paginatedData = filteredData.slice(startIndex, startIndex + podcastsPerPage);
 
+  // ====================================
+  // RANDOM RECOMMENDED SHOWS (10 items)
+  // ====================================
+  const recommendedShows = useMemo(() => {
+    if (!podcastData.length) return [];
+    // Shuffle, then take first 10
+    const shuffled = [...podcastData].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, 10);
+  }, [podcastData]);
+
   // ================================
   // RENDER JSX
   // ================================
@@ -141,22 +152,27 @@ export default function App() {
         <Route
           path="/"
           element={
-            <Main
-              podcastData={paginatedData}
-              loading={loading}
-              hasError={hasError}
+            <>
+              <RecommendedCarousel 
+                recommendedShows={recommendedShows}
+              />
+              <Main
+                podcastData={paginatedData}
+                loading={loading}
+                hasError={hasError}
 
-              searchLetters={searchLetters}
-              selectedGenre={selectedGenre}
-              setSelectedGenre={setSelectedGenre}
-              sortOrder={sortOrder}
-              setSortOrder={setSortOrder}
+                searchLetters={searchLetters}
+                selectedGenre={selectedGenre}
+                setSelectedGenre={setSelectedGenre}
+                sortOrder={sortOrder}
+                setSortOrder={setSortOrder}
 
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-              podcastsPerPage={podcastsPerPage}
-              totalPages={totalPages}
-            />
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                podcastsPerPage={podcastsPerPage}
+                totalPages={totalPages}
+              />
+            </>
           }
         />
 

@@ -37,7 +37,7 @@ header {
 }
 
 .header-fav-icon:active {
-    opacity: 0.25;
+    opacity: 0.75;
 }
 
 html[data-theme="dark"] .icon-2,
