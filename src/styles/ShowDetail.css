@@ -106,6 +106,10 @@
     width: 20px;
 }
 
+html[data-theme="dark"] .calender-icon {
+    filter: invert(1);
+}
+
 /* ===============
     Media queries
 =============== */

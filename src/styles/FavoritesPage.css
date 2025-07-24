@@ -29,6 +29,13 @@
     padding: 0.375rem;
     border: 1px solid var(--medium-gray-color);
     border-radius: var(--normal-border-radius);
+    background-color: var(--white-color);
+    color: var(--very-dark-gray-color);
+}
+
+.fav-sort option,
+.fav-sort option {
+  color: var(--very-dark-gray-color);
 }
 
 .fav-podcast-title-container {
@@ -42,6 +49,10 @@
   width: 17.5px;
   height: auto;
   opacity: 0.75;
+}
+
+html[data-theme="dark"] .fav-podcast-icon {
+  filter: invert(1);
 }
 
 .group-heading {
@@ -155,4 +166,9 @@
   font-size: 0.75rem;
   opacity: 0.5;
   letter-spacing: 0.5spx;
+}
+
+html[data-theme="dark"] .no-podcasts-text {
+  color: var(--very-dark-gray-color);
+  opacity: 0.25;
 }

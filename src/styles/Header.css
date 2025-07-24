@@ -5,6 +5,7 @@ header {
     gap: 2rem;
     padding: var(--normal-padding) var(--large-padding);
     box-shadow: 0 2px 4px var(--light-gray-color);
+    background-color: var(--white-color);
 }
 
 .header-left {
@@ -27,6 +28,11 @@ header {
     width: 30px;
     height: auto;
     cursor: pointer;
+}
+
+html[data-theme="dark"] .icon-2,
+html[data-theme="dark"] .icon-3 {
+    filter: invert(1);
 }
 
 .app-name {

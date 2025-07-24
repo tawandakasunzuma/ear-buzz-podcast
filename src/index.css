@@ -28,6 +28,28 @@
     --normal-border-radius: 0.5rem;
 }
 
+:root[data-theme="dark"] {
+
+  --white-color: rgb(15, 0, 0);
+  --very-light-gray-color: rgba(10, 0, 10, 0.95);
+  --light-gray-color: rgba(40, 0, 40, 0.75);
+  --medium-gray-color: rgba(80, 0, 80, 0.2);
+  --dark-gray-color: rgba(128, 128, 128, 0.1);
+  --very-dark-gray-color: rgba(255, 255, 255, 0.9);
+
+  --light-blue-color: rgba(120, 160, 255, 0.15);
+  --medium-blue-color: rgba(120, 160, 255, 0.4);
+  --dark-blue-color: rgba(120, 160, 255, 0.8);
+
+  --audio-player-color: rgba(10, 0, 10, 0.95);
+}
+
+/* Smooth transitions */
+*, *::before, *::after {
+    transition: background-color 300ms ease, color 300ms ease, border-color 300ms ease;
+}
+
+/* Global resets */
 * {
     box-sizing: border-box;
     padding: 0;

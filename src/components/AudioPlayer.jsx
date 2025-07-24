@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import '../styles/AudioPlayer.css';
-import podcastIcon from '../assets/images/podcast-icon.svg'
+import darkPodcastIcon from '../assets/images/podcast-icon.svg'
+import lightPodcastIcon from '../assets/images/light-podcast-icon.svg'
 import altPlayIcon from '../assets/images/alt-play-icon.svg';
 import altPauseIcon from '../assets/images/alt-pause-icon.svg';
 import fastForward from '../assets/images/fast-forward-icon.svg';
 import fastRewind from '../assets/images/fast-rewind-icon.svg';
+import { useTheme } from '../contexts/ThemeContext';
 
 export default function AudioPlayer ({ audioRef, episode }) {
 
@@ -112,6 +114,9 @@ export default function AudioPlayer ({ audioRef, episode }) {
         audio.removeEventListener('timeupdate', updateProgress);
       };
     }, [audioRef]);
+
+    const { theme } = useTheme();
+    const podcastIcon = theme === 'dark' ? lightPodcastIcon : darkPodcastIcon;
 
     return (
         <div className='audio-player-section'>

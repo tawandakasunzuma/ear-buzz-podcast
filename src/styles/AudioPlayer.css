@@ -98,6 +98,12 @@
     opacity: 0.25;
 }
 
+html[data-theme="dark"] .pause-and-play-btn,
+html[data-theme="dark"] .fast-forward-and-fast-rewind-btn {
+    filter: invert(1);
+}
+
+
 /* Right side container */
 
 .right-side-audio-section {
@@ -117,6 +123,10 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
+}
+
+html[data-theme="dark"] .audio-player-section {
+    background-color: rgba(15, 0, 0,0.9875);
 }
 
 /* Media queries */

@@ -61,6 +61,10 @@
     cursor: auto;
 }
 
+html[data-theme="dark"] .seasons-icon {
+    filter: invert(1);
+}
+
 .num-seasons {
     font-size: 0.75rem;
     font-weight: 600;
@@ -98,4 +102,9 @@
     font-weight: 600;
     color: var(--dark-gray-color);
     margin-top: 0.5rem;
+}
+
+html[data-theme="dark"] .updated-status {
+    color: var(--very-dark-gray-color);
+    opacity: 0.75;
 }

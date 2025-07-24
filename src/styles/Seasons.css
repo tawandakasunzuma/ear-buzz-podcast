@@ -46,6 +46,10 @@
     white-space: nowrap;
 }
 
+html[data-theme="dark"] .season-length {
+    color: var(--medium-dark-gray-color);
+}
+
 .learn-more-icon {
     width: 35px;
     min-height: auto;

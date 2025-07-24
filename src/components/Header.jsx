@@ -2,6 +2,7 @@ import "../styles/Header.css"
 import accountCircle from '../assets/images/account-circle-icon.svg'
 import searchIcon from "../assets/images/search-icon.svg"
 import podcastIcon from "../assets/images/ear-buzz-logo.png"
+import ThemeToggle from "./ThemeToggle"
 
 export default function Header ({searchLetters,setSearchLetters}) {
 
@@ -16,6 +17,9 @@ export default function Header ({searchLetters,setSearchLetters}) {
 
             <div className="header-right">
                 
+                {/* Theme toggle */}
+                <ThemeToggle/>
+
                 {/* Search bar */}
                 <input 
                     className="search-bar" 

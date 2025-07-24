@@ -1,0 +1,15 @@
+.theme-icon {
+    width: 17.5px;
+    height: 17.5px;
+    cursor: pointer;
+    opacity: 0.75;
+}
+
+.theme-icon:hover,
+.theme-icon:focus {
+    opacity: 1;
+}
+
+.theme-icon:active {
+    opacity: 0.25;
+}

@@ -3,7 +3,9 @@ import learnMoreIcon from '../assets/images/learn-more-icon.svg'
 import yellowFavIcon from '../assets/images/yellow-fav-icon.png'
 import playIcon from '../assets/images/play.png'
 import emptyFavIcon from '../assets/images/empty-fav-icon.png'
+import darkModeWhiteStar from '../assets/images/dark-mode-white-star.svg'
 import { useFavorites } from '../contexts/FavoritesContext';
+import { useTheme } from '../contexts/ThemeContext';
 import { useState } from 'react'
 
 export default function Seasons({ seasons, onEpisodeClick, showTitle }) {
@@ -11,9 +13,13 @@ export default function Seasons({ seasons, onEpisodeClick, showTitle }) {
 
   const { add, remove, isFavourited } = useFavorites();
 
+  const { theme } = useTheme();
+
   function toggleSeason(index) {
     setOpenSeason(prev => ({ ...prev, [index]: !prev[index] }))
   };
+
+  const emptyFav = theme === 'dark' ? darkModeWhiteStar : emptyFavIcon; 
 
   return (
     <>
@@ -70,7 +76,7 @@ export default function Seasons({ seasons, onEpisodeClick, showTitle }) {
                       <img
                         onClick={toggleFav} 
                         className="favorite-btn"
-                        src={favourited ? yellowFavIcon : emptyFavIcon}
+                        src={favourited ? yellowFavIcon : emptyFav}
                         alt={favourited ? 'Unfavourite' : 'Favourite'}
                       />
                       <h5 className="episode-title">
