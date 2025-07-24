@@ -104,6 +104,7 @@ html[data-theme="dark"] .fav-podcast-icon {
 .fav-icon:active {
     color: var(--white-color);
     opacity: 0.25;
+    transform: scale(0.9);
 }
 
 .fav-play-btn {
@@ -122,7 +123,7 @@ html[data-theme="dark"] .fav-podcast-icon {
 }
 
 .fav-play-btn:hover,
-.fav-play-btn:active {
+.fav-play-btn:focus {
   opacity: 1;
   transform: scale(1.0125);
 }
@@ -130,6 +131,7 @@ html[data-theme="dark"] .fav-podcast-icon {
 .fav-icon:active,
 .fav-play-btn:active {
   opacity: 0.25;
+  transform: scale(0.95);
 }
 
 .fav-left-side {

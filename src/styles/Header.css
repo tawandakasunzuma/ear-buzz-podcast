@@ -38,6 +38,7 @@ header {
 
 .header-fav-icon:active {
     opacity: 0.75;
+    transform: scale(0.9);
 }
 
 html[data-theme="dark"] .icon-2,

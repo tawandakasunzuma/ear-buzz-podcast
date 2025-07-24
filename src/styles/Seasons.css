@@ -22,8 +22,9 @@
     transition: all 300ms ease-in-out;
 }
 
-.seasons-container:hover {
-    transform: translateX(4px);
+.seasons-container:hover,
+.seasons-container:focus {
+    transform: translateX(3px);
 }
 
 .season-title {
@@ -68,6 +69,7 @@ html[data-theme="dark"] .season-length {
 
 .learn-more-icon:active {
     opacity: 0.25;
+    transform: scale(0.9);
 }
 
 /* ===============
@@ -132,6 +134,7 @@ html[data-theme="dark"] .season-length {
 .favorite-btn:active {
     color: var(--white-color);
     opacity: 0.25;
+    transform: scale(0.75);
 }
 
 .episode-image {

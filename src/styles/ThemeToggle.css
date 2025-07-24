@@ -11,5 +11,6 @@
 }
 
 .theme-icon:active {
-    opacity: 0.25;
+    opacity: 0.5;
+    transform: scale(0.9);
 }

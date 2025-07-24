@@ -17,6 +17,10 @@
     transform: translateY(-4px);
 }
 
+.podcast-container:active {
+    transform: scale(0.9);
+}
+
 /* Podcast image */
 
 .image-container {
