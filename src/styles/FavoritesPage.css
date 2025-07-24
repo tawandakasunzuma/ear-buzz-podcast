@@ -1,5 +1,5 @@
 .favorites {
-    background-color: rgba(128, 128, 128, 0.05);
+    background-color: var(--very-light-gray-color);
     padding: var(--large-padding);
     min-height: 90vh;
 }
@@ -64,7 +64,7 @@
   gap: 1rem;
   box-shadow: 0 2px 8px var(--medium-gray-color);
   border: 2px solid var(--light-gray-color);
-  background-color: white;
+  background-color: var(--white-color);
 }
 
 .fav-img {
@@ -86,11 +86,11 @@
 .fav-icon:hover,
 .fav-icon:focus {
     opacity: 1;
-    background-color: rgba(128, 128, 128, 0.05);
+    background-color: var(--light-gray-color);
 }
 
 .fav-icon:active {
-    color: white;
+    color: var(--white-color);
     opacity: 0.25;
 }
 
@@ -99,7 +99,7 @@
   height: auto;
   cursor: pointer;
   opacity: 0.75;
-  transform: all 600ms ease;
+  transition: all 600ms ease;
 }
 
 .fav-right-side {
@@ -114,7 +114,7 @@
 .fav-play-btn:hover,
 .fav-play-btn:active {
   opacity: 1;
-  transform: scale(1.05);
+  transform: scale(1.075);
 }
 
 .fav-icon:active,

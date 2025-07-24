@@ -88,7 +88,7 @@
 
 .genre-name:hover,
 .genre-name:focus {
-    background-color: rgba(128, 128, 128, 0.075);
+    background-color: var(--very-light-gray-color);
 }
 
 /* Updated Status */

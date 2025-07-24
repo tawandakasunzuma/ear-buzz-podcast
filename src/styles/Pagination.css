@@ -9,7 +9,7 @@
 .pagination-button {
     font-size: 0.75rem;
     padding: 0.5rem 1rem;
-    background-color: white;
+    background-color: var(--white-color);
     color: var(--very-dark-gray-color);
     padding: 0.5rem;
     border: 1px solid var(--dark-gray-color);
@@ -24,13 +24,13 @@
 .pagination-button:focus {
     border-color: var(--very-dark-gray-color);
     background-color: var(--very-dark-gray-color);
-    color: white;
+    color: var(--white-color);
 }
 
 .active {
     border-color: var(--very-dark-gray-color);
     background-color: var(--very-dark-gray-color);
-    color: white;
+    color: var(--white-color);
 }
 
 .pagination-button:active {
@@ -43,7 +43,7 @@
 }
 
 .pagination-button:disabled:hover {
-    background-color: white;
+    background-color: var(--white-color);
     border: 1px solid var(--dark-gray-color);
     color: var(--very-dark-gray-color);
 }
