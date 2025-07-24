@@ -34,7 +34,10 @@ export default function Main (props) {
             )}
 
             {/* Show no podcasts displayed */}
-            {props.podcastData.length === 0 && !props.loading && (
+            {props.podcastData.length === 0 
+                && !props.loading & !props.hasError 
+                && !props.hasError
+                && (
                 <div className="no-podcasts-container">
                 <p className="no-podcasts-text">No podcasts found</p>
                 </div>

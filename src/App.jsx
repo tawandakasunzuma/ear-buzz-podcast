@@ -143,6 +143,7 @@ export default function App() {
             <Main
               podcastData={paginatedData}
               loading={loading}
+              hasError={hasError}
 
               searchLetters={searchLetters}
               selectedGenre={selectedGenre}
