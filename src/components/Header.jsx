@@ -31,7 +31,7 @@ export default function Header ({searchLetters,setSearchLetters}) {
             </Link>
 
             <button 
-              className="hamburger-btn" 
+              className={`hamburger-btn outside-hamburger ${menuOpen ? "hidden" : ""}`} 
               onClick={toggleMenu}
               aria-label={menuOpen ? "Close menu" : "Open menu"}
             >
@@ -50,7 +50,20 @@ export default function Header ({searchLetters,setSearchLetters}) {
 
             {/* The sliding menu */}
             <div className={`header-right${menuOpen ? " open" : ""}`}>
-                
+
+                {menuOpen && (
+                    <button 
+                        className="hamburger-btn" 
+                        onClick={toggleMenu}
+                        aria-label="Close menu"
+                    >
+                        <img 
+                            src={theme === 'dark' ? lightCloseBtn : darkCloseBtn} 
+                            alt="Close menu icon" 
+                        />
+                    </button>
+                )}  
+
                 {/* Theme toggle */}
                 <ThemeToggle/>
 

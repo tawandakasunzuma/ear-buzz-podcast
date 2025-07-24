@@ -4,7 +4,7 @@
 
 .podcast-details {
     background-color: var(--very-light-gray-color);
-    padding: var(--large-padding);
+    padding: var(--large-padding) var(--large-padding) 4rem var(--large-padding);
     min-height: 90vh;
 }
 

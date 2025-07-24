@@ -112,9 +112,8 @@ html[data-theme="dark"] .icon-3 {
     }
 
     .header-right {
-        display: none;
-        position: absolute;
-        top: 100%;
+        position: fixed;
+        top: 0;
         right: 0;
         width: 250px;
         background: var(--white-color);
@@ -126,11 +125,26 @@ html[data-theme="dark"] .icon-3 {
         box-shadow: 0 2px 4px var(--light-gray-color);
         z-index: 1000;
         border-radius: 1rem 0 0 1rem;
+
+        /* 👇 Add these for the slide transition */
+        transform: translateX(100%);
+        transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        opacity: 0;
+        pointer-events: none;
     }
+
 
     .header-right.open {
         display: flex;
+        transform: translateX(0);
+        opacity: 1;
+        pointer-events: auto;
+}
+
+    .hamburger-btn.hidden {
+    display: none !important;
     }
+    
     .search-bar {
         width: 95%;
     }
