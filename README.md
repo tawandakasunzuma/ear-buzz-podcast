@@ -8,7 +8,7 @@
 
 ## 📝 Overview
 
-**Podcast App** is a beginner‑level React project built for university. It enables users to:
+**Podcast App** is a React project built that enables users to:
 
 - 🔍 Browse, search, and filter podcast shows
 - 🔊 Play episodes with a **global audio player** that persists across pages
