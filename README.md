@@ -4,10 +4,6 @@
 
 🌐 [Live Demo on Vercel](https://ear-buzz-podcast.vercel.app/)
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)  
-[![GitHub Stars](https://img.shields.io/github/stars/tawandakasunzuma/podcast-app?style=social)](https://github.com/tawandakasunzuma/podcast-app/stargazers)  
-[![GitHub Issues](https://img.shields.io/github/issues/tawandakasunzuma/podcast-app)](https://github.com/tawandakasunzuma/podcast-app/issues)
-
 ---
 
 ## 📝 Overview
