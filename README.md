@@ -65,7 +65,7 @@
 
    ```bash
    git clone https://github.com/tawandakasunzuma/TAWKAS25106_FTO2502_A_Tawanda-Kasunzuma_DJSPP.git
-   cd podcast-app
+   cd TAWKAS25106_FTO2502_A_Tawanda-Kasunzuma_DJSPP
    ```
 
 2. **Install dependencies**
