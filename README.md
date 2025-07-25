@@ -76,15 +76,7 @@
    yarn install
    ```
 
-3. **Configure environment variables**
-
-   Create a `.env.local` file in the root directory and add your API base URL:
-
-   ```env
-   REACT_APP_API_BASE_URL=https://api.example.com/episodes
-   ```
-
-4. **Run the app locally**
+3. **Run the app locally**
 
    ```bash
    npm start
@@ -92,7 +84,7 @@
    yarn start
    ```
 
-5. **Build for production**
+4. **Build for production**
 
    ```bash
    npm run build
