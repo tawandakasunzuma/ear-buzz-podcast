@@ -126,67 +126,31 @@ Once the app is running, here’s how to use the key features:
 
 ---
 
-## 🚀 Deployment
+## 🧩 Contributing
 
-This project is ready for deployment using **Vercel**.
+Contributions are welcome! To get started:
 
-### Steps to Deploy:
+1. **Fork** the repository
 
-1. **Push your code to GitHub**  
-   Make sure your latest code is committed and pushed to a GitHub repository.
+2. **Create a new branch**
 
-2. **Connect to Vercel**
+```bash
+git checkout -b feature/your-feature
+```
 
-   - Go to [vercel.com](https://vercel.com)
-   - Sign in with GitHub and import your repository.
+3. **Commit your changes**
 
-3. **Set environment variables**  
-   In the Vercel dashboard, add the same variables from your `.env.local` file to your project settings.
+```bash
+git commit -m "Add your feature"
+```
 
-4. **Configure your build settings (optional)**  
-   Vercel usually auto-detects the correct settings:
+4. **Push to your branch**
 
-   - Framework: React
-   - Build Command: `npm run build`
-   - Output Directory: `build`
+```bash
+git push origin feature/your-feature
+```
 
-5. **Add a custom domain (optional)**  
-   You can configure a custom domain or use the default Vercel URL.
-
-6. **Enable SPA routing fallback**  
-   Add a `vercel.json` file in the root of your project:
-
-   ```json
-   {
-     "rewrites": [{ "source": "/(.*)", "destination": "/" }]
-   }
-   ```
-
-7. **Add social media preview metadata**  
-   Use a tool like [metatags.io](https://metatags.io) to generate Open Graph and Twitter Card tags.  
-   Paste the tags into your `public/index.html` inside the `<head>`.
-
----
-
-## 🗂 Project Structure
-
-podcast-app/
-├── public/
-│ ├── favicon.ico
-│ └── index.html
-├── src/
-│ ├── assets/
-│ ├── components/
-│ ├── hooks/
-│ ├── pages/
-│ ├── styles/
-│ ├── App.jsx
-│ └── index.js
-├── .env.local
-├── package.json
-└── README.md
-
-Let me know if you'd like the **License**, **Contributing**, or **Contact** section next.
+5. **Open a Pull Request** on Github
 
 ---
 
