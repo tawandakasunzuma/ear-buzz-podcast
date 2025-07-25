@@ -8,26 +8,38 @@ import fastForward from '../assets/images/fast-forward-icon.svg';
 import fastRewind from '../assets/images/fast-rewind-icon.svg';
 import { useTheme } from '../contexts/ThemeContext';
 
+/**
+ * AudioPlayer shows playback controls and progress for a selected episode.
+ *
+ * @param {{ audioRef: React.RefObject<HTMLAudioElement>, episode: object|null }} props
+ * @param {object} props.audioRef - Ref for the <audio> element.
+ * @param {object|null} props.episode - Current episode data (has file, image, title, etc.).
+ */
 export default function AudioPlayer ({ audioRef, episode }) {
 
-    // State to track where audio is playing or not
-    const [isPlaying,setIsPlaying] = useState (false);
+    /* ====================
+      STATE
+    ==================== */
 
-    // State for playback progress
+    const [isPlaying,setIsPlaying] = useState (false);
     const [progress,setProgress] = useState(0)
 
-    // useEffect to handle audio playback when a new episode is selected
+    /* ====================
+      EFFECTS
+    ==================== */
+
+    // Handle audio playback (load and autoplay) when a new episode is selected
     useEffect(() => {
       const audio = audioRef.current;
       if (!episode || !episode.file) return;
 
-      audio.pause(); // Stop any current audio
-      setIsPlaying(false);
+      audio.pause(); // stop any current playback
+      setIsPlaying(false); // reflect that it’s paused
+      audio.src = episode.file; // set new source URL
+      audio.load(); // load the new file
+      audio.currentTime = 0; // start from beginning
 
-      audio.src = episode.file;
-      audio.load();
-      audio.currentTime = 0;
-
+      // Attempt to play audio (some browsers block autoplay)
       const playPromise = audio.play();
       if (playPromise !== undefined) {
         playPromise
@@ -39,13 +51,16 @@ export default function AudioPlayer ({ audioRef, episode }) {
       }
     }, [episode, audioRef]);
 
+    /* ====================
+      FUNCTIONS
+    ==================== */
 
     /**
-     * Converts a number of seconds into MM:SS format
+     * Format seconds as "MM:SS".
      *
      * @param {number} [sec=0] - Time in seconds.
-     * @returns {string} Formatted time string in MM:SS format.
-    */
+     * @returns {string} - Formatted string.
+     */
     function formatTime(sec = 0) {
         const m = Math.floor(sec / 60).toString().padStart(2, '0')
         const s = Math.floor(sec % 60).toString().padStart(2, '0')
@@ -53,14 +68,16 @@ export default function AudioPlayer ({ audioRef, episode }) {
     }
 
     /**
-     * 
-     * @returns 
+     * Toggle between play and pause.
      */
     function togglePlay () {
+
         // If audio source is not set, do nothing
         if (!audioRef.current.src) return;
+      
         // Pause audio if it's playing, otherwise play it
         isPlaying ? audioRef.current.pause() : audioRef.current.play();
+      
         // Update playing state on button clicks
         setIsPlaying(prev => !prev)
     }
@@ -73,20 +90,35 @@ export default function AudioPlayer ({ audioRef, episode }) {
     function seek(offset) {
       const audio = audioRef.current;
       if (audio && audio.src) {
-        audio.currentTime = Math.max(0, Math.min(audio.duration, audio.currentTime + offset));
+        audio.currentTime = Math.max(
+          0, // Minimum, start of audio
+          Math.min(
+            audio.duration, // Maximum, end of audio
+            audio.currentTime + offset // Target time after offset
+          )
+        );
       }
     }
 
+    /**
+     * Stops the user from leaving the page if audio is playing.
+     *
+     * @param {Event} event - The beforeunload event.
+     */
+    function handleBeforeUnload (event) {
+      if (isPlaying && audioRef.current?.src) {
+        event.preventDefault();
+        // Show a confirmation message to prevent accidental leaving
+        event.returnValue = 'Are you sure you want to leave? Your audio will stop.';
+      }
+    }
+
+    /* ====================
+      EFFECTS
+    ==================== */
+
     // Warn the user before leaving the page if audio is playing
     useEffect(() => {
-      // Handler for the browser's beforeunload event
-      const handleBeforeUnload = (e) => {
-        if (isPlaying && audioRef.current?.src) {
-          e.preventDefault();
-          // Show a confirmation message to prevent accidental leaving
-          e.returnValue = 'Are you sure you want to leave? Your audio will stop.';
-        }
-      };
 
       // Add event listener when component mounts or dependencies change
       window.addEventListener('beforeunload', handleBeforeUnload);
@@ -115,9 +147,16 @@ export default function AudioPlayer ({ audioRef, episode }) {
       };
     }, [audioRef]);
 
+    /* ====================
+      UI theme changes
+    ==================== */
+
     const { theme } = useTheme();
     const podcastIcon = theme === 'dark' ? lightPodcastIcon : darkPodcastIcon;
 
+    /* ====================
+      * RETURN *
+    ==================== */
     return (
         <div className='audio-player-section'>
 
@@ -158,7 +197,7 @@ export default function AudioPlayer ({ audioRef, episode }) {
                   className='pause-and-play-btn'>
                       <img 
                           src={isPlaying ? altPauseIcon : altPlayIcon} 
-                          alt="playback icon"
+                          alt={isPlaying ? "Pause icon" : "Play icon"}
                       />
               </button>
               {/* Fast forward button */}
