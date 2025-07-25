@@ -6,21 +6,46 @@ import podcastIcon from '../assets/images/podcast-icon.svg'
 import deleteIcon from '../assets/images/delete-icon.svg'
 import playIcon from '../assets/images/play.png'
 
+/**
+ * Displays and manages the user's saved episodes.
+ *
+ * @param {{ setAudioSrc: function, setCurrentEpisode: function }} props
+ * @param {function} props.setAudioSrc - Sets the audio source URL.
+ * @param {function} props.setCurrentEpisode - Sets the current episode object.
+ */
 export default function FavoritesPage({ setAudioSrc, setCurrentEpisode }) {
+
+  // Get favorites array and helper functions from context
   const { favorites, remove, clearAll } = useFavorites();
+
+  /* ====================
+     STATE
+  ==================== */
 
   const [sortBy, setSortBy] = useState("date-new");
   const [filterShow, setFilterShow] = useState("All Shows");
 
+  /* ====================
+    GROUPED FAVORITES
+  ==================== */
+
   // Group the favorite episodes by show title
   const grouped = useMemo(() => {
+
     return favorites.reduce((acc, fav) => {
+
       // If the show title doesn't exist, create an empty array and add the favorite episode
       (acc[fav.showTitle] ||= []).push(fav);
+
       // Return the updated accumulator
       return acc;
+
     }, {}); // Start with an empty object
   }, [favorites]); // Re-run this code when the favorites array changes
+
+  /* ====================
+     FUNCTION
+  ==================== */
 
   /**
    * Removes a favorite episode by its ID.
@@ -32,17 +57,10 @@ export default function FavoritesPage({ setAudioSrc, setCurrentEpisode }) {
   }
 
   /**
-   * Sorts a list of items based on the selected sorting criteria.
-   * 
-   * @param {Array} list - The list of items to sort.
-   * @returns {Array} - The sorted list.
-   * 
-   * The list is sorted by one of the following criteria:
-   * - "title-asc" (A to Z)
-   * - "title-desc" (Z to A)
-   * - "date-new" (Newest first)
-   * - "date-old" (Oldest first)
-  */
+   * Sort list according to sortBy state.
+   * @param {Array} list - Array of favorite objects.
+   * @returns {Array} - New sorted array.
+   */
   function sortList(list) {
     return [...list].sort((a, b) => {
       if (sortBy === "title-asc") return a.title.localeCompare(b.title);
@@ -77,9 +95,9 @@ export default function FavoritesPage({ setAudioSrc, setCurrentEpisode }) {
   /**
    * Returns the first few words of a given text.
    * 
-   * @param {string} text - The text to trim.
-   * @param {number} [wordLimit=50] - The maximum number of words to return. Defaults to 50.
-   * @returns {string} - The first `wordLimit` words of the text followed by an ellipsis.
+   * @param {string} text - Full description text.
+   * @param {number} [wordLimit=50] - Max words to include. Default is 50.
+   * @returns {string} - Truncated text.
   */
   function getFirstWords(text, wordLimit = 50) {
     if (!text || text.trim() === "") return "";
@@ -99,14 +117,21 @@ export default function FavoritesPage({ setAudioSrc, setCurrentEpisode }) {
     setAudioSrc(fav.file);
   }
 
+  /* ====================
+    * RETURN *
+  ==================== */
+
   return (
     <div className="favorites">
 
+      {/* Top header with title and clear-all button */}
       <div className="top-fav-page">
+
         <div className="top-title-heading-and-sub">
           <h2 className="favorites-heading">My Favourites</h2>
           <p className="favorites-sub-heading">Your saved episodes from all shows</p>
         </div>
+
         <button 
           className="clear-fav-btn" 
             onClick={() => {
@@ -117,11 +142,14 @@ export default function FavoritesPage({ setAudioSrc, setCurrentEpisode }) {
         >
           Remove All Favorites
         </button>
+
       </div>
 
-      {/* Controls to sort */}
+      {/* Sort & filter controls */}
       <div className="sorting-container">
+        
         <label className="filter-by-text">Sort & FIlter:</label>
+        
         <select 
           value={sortBy} 
           onChange={e => setSortBy(e.target.value)}
@@ -132,6 +160,7 @@ export default function FavoritesPage({ setAudioSrc, setCurrentEpisode }) {
           <option value="title-asc">Title (A-Z)</option>
           <option value="title-desc">Title (Z-A)</option>
         </select>
+        
         <select
           value={filterShow}
           onChange={e => setFilterShow(e.target.value)}
@@ -144,46 +173,51 @@ export default function FavoritesPage({ setAudioSrc, setCurrentEpisode }) {
             </option>
           ))}
         </select>
+      
       </div>
       
       <p className="sort-note">* Sorting applies within each podcast *</p>
       
-      {/* Display each group */}
+      {/* Groups of favorites by show */}
       {Object.entries(grouped).map(([showTitle, list]) => (
         (filterShow === "All Shows" || filterShow === showTitle) && (
           <section key={showTitle} className="show-group">
             
-            {/* Favorite podcast heading */}
+            {/* Show header */}
             <div className="fav-podcast-title-container">
               <img className="fav-podcast-icon" src={podcastIcon} alt="Podcast icon" />
               <h3 className="group-heading">{he.decode(showTitle)}</h3>
               <p className="fav-num-episodes">({list.length} {list.length === 1 ? 'episode' : 'episodes'})</p>
             </div>
 
-            {/*  */}
+            {/* Each favorite item */}
             {sortList(list).map((fav, index) => (
               <div key={index} className="fav-item">
-
-                {/* Left side favorite */}
                 <div className="fav-left-side">
+
                   <img className="fav-img" src={fav.image} alt={fav.title} />
+
                   <div className="fav-info">
                     <p className="fav-title">
                       Episode {fav.episodeNumber} - {fav.title}
                     </p>
+
                     <span className="fav-season-num">
                       • Season {fav.seasonNumber} •
                     </span>
+
                     <p className="fav-description">
                       {getFirstWords(fav.description)}
                     </p>
+
                     <small className="fav-added-on">
                       {formatAddedAt(fav.addedAt)}
                     </small>
+
                   </div>
                 </div>
 
-                {/* Right side favorite */}
+                {/* Right side: remove & play */}
                 <div className="fav-right-side">
                   <img 
                     className="fav-icon" 
@@ -203,12 +237,13 @@ export default function FavoritesPage({ setAudioSrc, setCurrentEpisode }) {
         )
       ))}
     
-      {/* Show no details available */}
+      {/* Show when no favorites exist */}
       {favorites.length < 1 && (
         <div className="no-podcasts-container">
             <p className="no-podcasts-text">No favorites saved</p>
         </div>
       )}
+      
     </div>
   );
 }
