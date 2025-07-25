@@ -135,7 +135,7 @@ html[data-theme="dark"] .audio-player-section {
     .audio-player-section {
         gap: 1rem;
         grid-template-columns: 1fr;
-        padding: 1.75rem;
+        padding: 1.5rem;
     }
     .left-side-audio-section,
     .right-side-audio-section {
