@@ -82,7 +82,10 @@ export default function FavoritesPage({ setAudioSrc, setCurrentEpisode }) {
    * @returns {string} - The first `wordLimit` words of the text followed by an ellipsis.
   */
   function getFirstWords(text, wordLimit = 50) {
-    return text?.split(" ").slice(0, wordLimit).join(" ") + "…";
+    if (!text || text.trim() === "") return "";
+    const words = text.trim().split(" ");
+    const sliced = words.slice(0, wordLimit).join(" ");
+    return words.length > wordLimit ? sliced + "…" : sliced;
   }
 
   /**
@@ -104,7 +107,16 @@ export default function FavoritesPage({ setAudioSrc, setCurrentEpisode }) {
           <h2 className="favorites-heading">My Favourites</h2>
           <p className="favorites-sub-heading">Your saved episodes from all shows</p>
         </div>
-        <button className="clear-fav-btn" onClick={clearAll}>Remove All Favorites</button>
+        <button 
+          className="clear-fav-btn" 
+            onClick={() => {
+              if (window.confirm("Are you sure you want to delete all favorites?")) {
+                clearAll();
+              }
+            }}
+        >
+          Remove All Favorites
+        </button>
       </div>
 
       {/* Controls to sort */}

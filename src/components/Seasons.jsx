@@ -95,6 +95,7 @@ export default function Seasons({ seasons, onEpisodeClick, showTitle }) {
                         src={playIcon}
                         alt="Play episode"
                         onClick={() => onEpisodeClick(episode)}
+                        loading='lazy'
                       />
                       <img
                         className="episode-image"

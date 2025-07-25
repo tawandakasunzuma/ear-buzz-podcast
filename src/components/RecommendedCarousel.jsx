@@ -75,7 +75,7 @@ export default function RecommendedCarousel({ recommendedShows }) {
             <div className="carousel-container" ref={carouselRef}>
                 {recommendedShows.map(show => (
                 <Link to={`/show/${show.id}`} key={show.id} className="carousel-item">
-                    <img src={show.image} alt={show.title} />
+                    <img src={show.image} alt={show.title} loading="lazy" />
                     <h3 className="item-title">{show.title}</h3>
                     <div className="genre-tags">
                     {show.genres.map(id => (
