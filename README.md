@@ -37,7 +37,7 @@
 
 - **Episode Favourites**
 
-  - Click heart icon to add/remove favourites
+  - Click star icon to add/remove favourites
   - Favourites page grouped by show, sortable by title or date added
 
 - **Recommended Shows Carousel**
