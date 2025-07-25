@@ -9,38 +9,41 @@ import FavoritesPage from './components/FavoritesPage';
 import RecommendedCarousel from './components/RecommendedCarousel.jsx';
 import "./styles/App.css";
 
+/**
+ * Root component of the podcast.
+ * It handles:
+ *  - Audio playback state
+ *  - Fetching and filtering podcast data
+ *  - Pagination
+ *  - Routing between Home, ShowDetail, and Favorites pages
+ */
 export default function App() {
 
-  // =========================
-  // AUDIO & EPISODE STATE
-  // =========================
+  /* ====================
+    STATE
+  ==================== */
+
+  // Audio & Episode state
   const [currentAudioSrc, setCurrentAudioSrc] = useState('');
   const [currentEpisode, setCurrentEpisode] = useState(null);
-  const audioRef = useAudio();
-
-  // ===============================
-  // DATA FETCHING STATE
-  // ===============================
+  const audioRef = useAudio(); // Custom hook to control <audio> element
+  // Data fetching state
   const [podcastData, setPodcastData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
-
-  // ===============================
-  // SEARCH / FILTER / SORT STATE
-  // ===============================
+  // Search, filter, sort state
   const [searchLetters, setSearchLetters] = useState("");
   const [selectedGenre, setSelectedGenre] = useState("All Genres");
   const [sortOrder, setSortOrder] = useState("Newest");
-
-  // ===============================
-  // PAGINATION STATE
-  // ===============================
+  // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
   const podcastsPerPage = 12;
 
-  // ===================================================
-  // LOAD SESSION DATA (for filters + page restore)
-  // ===================================================
+  /* ====================
+    EFFECTS
+  ==================== */
+  
+  // Load session data
   useEffect(() => {
     const savedSearch = sessionStorage.getItem('searchLetters');
     if (savedSearch && savedSearch !== "undefined") setSearchLetters(savedSearch);
@@ -55,9 +58,7 @@ export default function App() {
     if (!isNaN(savedPage)) setCurrentPage(savedPage);
   }, []);
 
-  // ================================
-  // FETCH PODCAST DATA FROM API
-  // ================================
+  // Fetch podcast data from API
   useEffect(() => {
     fetch("https://podcast-api.netlify.app/shows")
       .then(response => {
@@ -76,9 +77,10 @@ export default function App() {
       });
   }, []);
 
-  // ===============================
-  // FILTER PODCASTS BY SEARCH
-  // ===============================
+  /* ====================
+    FILTER PODCASTS BY SEARCH
+  ==================== */
+  
   let filteredData = podcastData.filter(podcast =>
     podcast.title.toLowerCase().includes(searchLetters.toLowerCase())
   );
@@ -88,7 +90,7 @@ export default function App() {
     setCurrentPage(1);
   }, [searchLetters]);
 
-  // Filter by genre
+  // Filter by genre, if not selected 'All Genres'
   if (selectedGenre !== "All Genres") {
     const genreId = Number(selectedGenre);
     filteredData = filteredData.filter(podcast =>
@@ -112,9 +114,10 @@ export default function App() {
     }
   });
 
-  // ====================================
-  // PAGINATION - CURRENT PAGE SETUP
-  // ====================================
+  /* ====================
+    PAGINATION - CURRENT PAGE SETUP
+  ==================== */
+
   const totalPages = Math.ceil(filteredData.length / podcastsPerPage);
 
   useEffect(() => {
@@ -126,38 +129,58 @@ export default function App() {
   const startIndex = (currentPage - 1) * podcastsPerPage;
   const paginatedData = filteredData.slice(startIndex, startIndex + podcastsPerPage);
 
-  // ====================================
-  // RANDOM RECOMMENDED SHOWS (10 items)
-  // ====================================
-  const recommendedShows = useMemo(() => {
-    if (!podcastData.length) return [];
-    // Shuffle, then take first 10
-    const shuffled = [...podcastData].sort(() => Math.random() - 0.5);
-    return shuffled.slice(0, 10);
-  }, [podcastData]);
+  /* ====================
+    RANDOM RECOMMENDED SHOWS (10 items)
+  ==================== */
 
-  // ================================
-  // RENDER JSX
-  // ================================
+  const recommendedShows = useMemo(() => {
+
+    // If no podcasts found in API, do nothing
+    if (podcastData.length === 0) return [];
+
+    // Make a copy of the original data
+    const copied = [...podcastData];
+
+    // Shuffle the copy
+    for (let i = copied.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [copied[i], copied[j]] = [copied[j], copied[i]];
+    }
+
+    // Take the first 10 items from the shuffled list
+    return copied.slice(0, 10);
+  }, [podcastData])
+
+  /* ====================
+    * RETURN *
+  ==================== */
+
   return (
     <>
+      {/* Header */}
       <Header
         searchLetters={searchLetters}
         setSearchLetters={setSearchLetters}
       />
 
       <Routes>
+
         {/* Home route with podcast grid */}
         <Route
           path="/"
           element={
             <>
               {!loading && (
+              
+              // Recommended Carousel
               <RecommendedCarousel 
                 recommendedShows={recommendedShows}
               />
+
               )}
               {!loading && (
+
+                // Main component
                 <Main
                   podcastData={paginatedData}
                   loading={loading}
@@ -215,7 +238,7 @@ export default function App() {
         </div>
       }
 
-      {/* Global audio player at bottom */}
+      {/* Global audio player */}
       <AudioPlayer audioRef={audioRef} episode={currentEpisode} />
     </>
   );

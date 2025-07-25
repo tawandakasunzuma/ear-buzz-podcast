@@ -52,6 +52,7 @@
     border: 1px solid var(--very-dark-gray-color);
     cursor: pointer;
     opacity: 0.5;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
     transition: all 300ms ease;
 }
 
