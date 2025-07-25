@@ -1,8 +1,8 @@
 # 🎧 Podcast App
 
-> A polished React podcast application featuring global audio playback, episode favouriting, a recommended shows carousel, and light/dark theme support.
+> A polished and responsive React podcast platform that allows users to explore, play, and favourite episodes with seamless navigation and theme personalization.
 
-🌐 [Live Demo on Vercel](https://ear-buzz-podcast.vercel.app/)
+🌐 [![Live Demo](https://img.shields.io/badge/Live-Demo-blue?style=for-the-badge&logo=vercel)](https://ear-buzz-podcast.vercel.app/)
 
 ---
 
