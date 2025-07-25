@@ -173,7 +173,6 @@ html[data-theme="dark"] .season-length {
         flex-wrap: wrap;
     }
     .episode-item {
-        border: 2px solid red;
         flex-direction: column;
     }
     .top-episode {
