@@ -107,7 +107,7 @@ Once the app is running, here’s how to use the key features:
 
 ### ❤️ Favouriting Episodes
 
-- Click the heart icon to mark or unmark an episode as a favourite.
+- Click the star icon to mark or unmark an episode as a favourite.
 - Favourites are saved in `localStorage` and persist across sessions.
 - Visit the **Favourites** page to see saved episodes, grouped by show.
 - Episodes can be sorted by title or date added.
