@@ -61,11 +61,11 @@ export default function RecommendedCarousel({ recommendedShows }) {
                 <h2 className="carousel-title">Recommended Shows</h2>
                 <div className='scroll-buttons'>
                     <img 
-                        className="carousel-btn" 
+                        className="carousel-btn-left" 
                         src={backArrow} alt="Back arrow"
                         onClick={() => scroll('left')} />
                     <img 
-                        className="carousel-btn" 
+                        className="carousel-btn-right" 
                         src={forwardArrow} alt="Forward arrow" 
                         onClick={() => scroll('right')}/>
                 </div>

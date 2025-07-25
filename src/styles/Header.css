@@ -126,8 +126,6 @@ html[data-theme="dark"] .icon-3 {
         box-shadow: 0 2px 4px var(--light-gray-color);
         z-index: 1000;
         border-radius: 1rem 0 0 1rem;
-
-        /* 👇 Add these for the slide transition */
         transform: translateX(100%);
         transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
         opacity: 0;

@@ -1,6 +1,5 @@
 import { useState, useEffect, useMemo  } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Layout from './components/Layout';  
 import useAudio from '../hooks/useAudio.js';
 import Header from './components/Header';
 import Main from './components/Main';

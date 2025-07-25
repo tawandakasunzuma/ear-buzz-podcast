@@ -126,7 +126,7 @@ html[data-theme="dark"] .fast-forward-and-fast-rewind-btn {
 }
 
 html[data-theme="dark"] .audio-player-section {
-    background-color: rgba(15, 0, 0,0.9875);
+    background-color: var(--audio-player-color);
 }
 
 /* Media queries */

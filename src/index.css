@@ -11,7 +11,7 @@
     --medium-blue-color: rgba(35, 70, 105,0.5);
     --dark-blue-color: rgba(35, 70, 205,0.75);
 
-    --audio-player-color: rgba(255, 255, 255,0.875);
+    --audio-player-color: rgba(255, 255, 255,0.75);
 
     /* Paddings */
     --small-padding: 0.5rem;
@@ -32,7 +32,7 @@
 
   --white-color: rgb(15, 0, 0);
   --very-light-gray-color: rgba(10, 0, 10, 0.95);
-  --light-gray-color: rgba(40, 0, 40, 0.75);
+  --light-gray-color: rgba(20, 0, 20, 0.75);
   --medium-gray-color: rgba(80, 0, 80, 0.2);
   --dark-gray-color: rgba(128, 128, 128, 0.1);
   --very-dark-gray-color: rgba(255, 255, 255, 0.9);
@@ -64,6 +64,7 @@
 
 body {
     padding-bottom: 4rem;
+    background-color: var(--very-light-gray-color);
 }
 
 html, body {

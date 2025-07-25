@@ -7,7 +7,8 @@ import deleteIcon from '../assets/images/delete-icon.svg'
 import playIcon from '../assets/images/play.png'
 
 export default function FavoritesPage({ setAudioSrc, setCurrentEpisode }) {
-  const { favorites, remove } = useFavorites();
+  const { favorites, remove, clearAll } = useFavorites();
+
   const [sortBy, setSortBy] = useState("date-new");
   const [filterShow, setFilterShow] = useState("All Shows");
 
@@ -98,18 +99,23 @@ export default function FavoritesPage({ setAudioSrc, setCurrentEpisode }) {
   return (
     <div className="favorites">
 
-      <h2 className="favorites-heading">My Favourites</h2>
-      <p className="favorites-sub-heading">Your saved episodes from all shows</p>
+      <div className="top-fav-page">
+        <div className="top-title-heading-and-sub">
+          <h2 className="favorites-heading">My Favourites</h2>
+          <p className="favorites-sub-heading">Your saved episodes from all shows</p>
+        </div>
+        <button className="clear-fav-btn" onClick={clearAll}>Remove All Favorites</button>
+      </div>
 
       {/* Controls to sort */}
       <div className="sorting-container">
-        <label className="filter-by-text">Sort:</label>
+        <label className="filter-by-text">Sort & FIlter:</label>
         <select 
           value={sortBy} 
           onChange={e => setSortBy(e.target.value)}
           className="fav-sort"
         >
-          <option value="date-new" selected>Newest Added</option>
+          <option value="date-new">Newest Added</option>
           <option value="date-old">Oldest Added</option>
           <option value="title-asc">Title (A-Z)</option>
           <option value="title-desc">Title (Z-A)</option>
@@ -127,6 +133,8 @@ export default function FavoritesPage({ setAudioSrc, setCurrentEpisode }) {
           ))}
         </select>
       </div>
+      
+      <p className="sort-note">* Sorting applies within each podcast *</p>
       
       {/* Display each group */}
       {Object.entries(grouped).map(([showTitle, list]) => (

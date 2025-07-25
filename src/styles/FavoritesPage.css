@@ -4,6 +4,21 @@
     min-height: 90vh;
 }
 
+.top-fav-page {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-self: center;
+  width: 100%;
+  gap: 1rem;
+}
+
+.top-title-heading-and-sub {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
 .favorites-heading {
     font-size: 1.5rem;
     color: var(--very-dark-gray-color);
@@ -13,7 +28,31 @@
     font-size: 0.875rem;
     color: var(--very-dark-gray-color);
     opacity: 0.75;
-    margin-top: 0.5rem;
+}
+
+.clear-fav-btn {
+  background-color: red;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: bold;
+  padding: 0.5rem 0.75rem;
+  border-radius: 1rem;
+  border: transparent;
+  opacity: 0.75;
+  cursor: pointer;
+  transition: all 300ms ease;
+  align-self: center;
+}
+
+.clear-fav-btn:hover,
+.clear-fav-btn:focus {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+.clear-fav-btn:active {
+  opacity: 0.25;
+  transform: scale(0.9875);
 }
 
 .sorting-container {
@@ -22,7 +61,7 @@
     align-items: center;
     flex-wrap: wrap;
     gap: var(--normal-gap);
-    margin: 2rem 0;
+    margin: 2rem 0 1rem 0;
 }
 
 .fav-sort {
@@ -36,6 +75,14 @@
 .fav-sort option,
 .fav-sort option {
   color: var(--very-dark-gray-color);
+}
+
+.sort-note {
+  font-size: 0.75rem;
+  color: var(--very-dark-gray-color);
+  opacity: 0.625;
+  letter-spacing: 0.75px;
+  margin-bottom: 4rem;
 }
 
 .fav-podcast-title-container {
@@ -97,7 +144,7 @@ html[data-theme="dark"] .fav-podcast-icon {
 .fav-icon:hover,
 .fav-icon:focus {
     opacity: 1;
-    transform: scale(1.2);
+    transform: scale(1.1);
     background-color: rgba(255, 0, 0, 0.125);
 }
 
@@ -183,5 +230,8 @@ html[data-theme="dark"] .no-podcasts-text {
   }
   .fav-right-side {
     flex-direction: row;
+  }
+  .no-podcasts-container {
+    display: none;
   }
 }

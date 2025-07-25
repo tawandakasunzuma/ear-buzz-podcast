@@ -31,8 +31,15 @@ export function FavoritesProvider({ children }) {
     return favorites.some(f => f.id === id);
   }
 
+  function clearAll() {
+    setFavorites([]);
+    localStorage.removeItem("favorites");
+  }
+
   return (
-    <FavoritesContext.Provider value={{ favorites, add, remove, isFavourited }}>
+    <FavoritesContext.Provider
+      value={{ favorites, add, remove, isFavourited, clearAll }}
+    >
       {children}
     </FavoritesContext.Provider>
   );
