@@ -2,7 +2,7 @@
 
 > A polished and responsive React podcast platform that allows users to explore, play, and favourite episodes with seamless navigation and theme personalization.
 
-🌐 [![Live Demo](https://img.shields.io/badge/Live-Demo-blue?style=for-the-badge&logo=vercel)](https://ear-buzz-podcast.vercel.app/)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Vercel-000?logo=vercel&logoColor=white&style=flat)](https://ear-buzz-podcast.vercel.app/)
 
 ---
 
