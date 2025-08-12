@@ -64,8 +64,8 @@
 1. **Clone the repo**
 
    ```bash
-   git clone https://github.com/tawandakasunzuma/TAWKAS25106_FTO2502_A_Tawanda-Kasunzuma_DJSPP.git
-   cd TAWKAS25106_FTO2502_A_Tawanda-Kasunzuma_DJSPP
+   git clone https://github.com/tawandakasunzuma/ear-buzz-podcast.git
+   cd ear-buzz-podcast
    ```
 
 2. **Install dependencies**
