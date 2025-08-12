@@ -48,12 +48,7 @@ Designed for seamless navigation and responsive layouts.
 
 ## 🛠️ Getting Started
 
-### Prerequisites
-
-- Node.js v14+
-- npm or Yarn
-
-### Installation
+**Requirements:** Node.js v14+ and npm or Yarn
 
 1. **Clone the repo**
 
@@ -90,33 +85,42 @@ Designed for seamless navigation and responsive layouts.
 
 ## 💡 Usage Guide
 
-Once the app is running, here’s how to use the key features:
-
 ### 🔊 Global Audio Player
-
-- The player is fixed at the bottom of the screen.
-- It remains active and continues playback across all pages.
-- Includes controls for play, pause, seek, and displays current progress.
-- A confirmation prompt appears if the user tries to reload or close the page while audio is playing.
+- The audio player is fixed at the bottom of the screen and continues playback across all pages.
+- Controls include play, pause, seek, and progress display.
+- A confirmation prompt appears if you try to reload or close the page while audio is playing.
 
 ### ❤️ Favouriting Episodes
-
-- Click the star icon to mark or unmark an episode as a favourite.
+- Click the star icon to mark or unmark episodes as favourites.
 - Favourites are saved in `localStorage` and persist across sessions.
-- Visit the **Favourites** page to see saved episodes, grouped by show.
+- Visit the **Favourites** page to view saved episodes grouped by show.
 - Episodes can be sorted by title or date added.
 
 ### 🎠 Recommended Shows Carousel
-
-- A horizontally scrollable carousel appears on the home page.
-- Each card displays a show’s image, title, and genre tags.
+- Browse shows via a horizontally scrollable carousel on the home page.
+- Each card displays the show’s image, title, and genre tags.
 - Use swipe or arrow controls to browse.
-- Clicking a show navigates to its detail page.
+- Click a show to navigate to its detail page.
 
 ### 🌗 Theme Toggle
+- Use the toggle in the header to switch between light and dark modes.
+- Your preference is saved in `localStorage` and applied throughout the app.
 
-- Use the toggle in the header to switch between light and dark mode.
-- Your preference is saved in `localStorage` and applied across the app.
+---
+
+## 📖 Code Structure & Quality
+
+The project employs a component-driven React architecture with routing:
+
+- `src/components/` — Contains components like audio player, show detail, seasons list, favourites page, and carousel.  
+- `src/hooks/` — Custom hooks to manage audio playback and other logic.  
+- `src/App.jsx` — Root component managing routes and global state.  
+- `src/index.js` — Application entry point.  
+
+Uses React Router for page navigation.  
+CSS files follow a modular, scoped approach.  
+Persistent states such as favourites and theme are stored in `localStorage`.  
+Code is clean, modular, and well-documented to ease maintenance and future enhancements.
 
 ---
 
@@ -126,32 +130,27 @@ Contributions are welcome! To get started:
 
 1. **Fork** the repository
 
-2. **Create a new branch**
+2. **Create a new branch:**
 
-```bash
-git checkout -b feature/your-feature
-```
+   ```git checkout -b feature/your-feature```
 
-3. **Commit your changes**
+3. **Commit your changes:**
 
-```bash
-git commit -m "Add your feature"
-```
+   ```git commit -m "Add your feature"```
 
-4. **Push to your branch**
+4. **Push to your branch:**
 
-```bash
-git push origin feature/your-feature
-```
+   ```git push origin feature/your-feature```
 
-5. **Open a Pull Request** on Github
+5. **Open a Pull Request** on GitHub
 
 ---
 
 ## 📬 Contact
 
-For feedback, questions, or collaboration opportunities:
+For questions, feedback, or collaboration, please reach out to:
 
 **Tawanda Kasunzuma**  
-📧 [tskasunzuma@gmail.com](mailto:tskasunzuma@gmail.com)  
-🔗 [GitHub Profile](https://github.com/tawandakasunzuma)
+📧 tskasunzuma@gmail.com  
+🔗 https://github.com/tawandakasunzuma  
+🔗 https://www.linkedin.com/in/tawanda-kasunzuma/
