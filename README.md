@@ -1,8 +1,8 @@
-# 🎧 Ear Buzz Podcast App
+# Ear Buzz Podcast App
 
 > A polished and responsive React podcast platform that allows users to explore, play, and favourite episodes with seamless navigation and theme personalization.
 
-[![Live Demo](https://img.shields.io/badge/Live_Demo-Vercel-000?logo=vercel&logoColor=white&style=flat)](https://ear-buzz-podcast.vercel.app/)
+[![Live Demo on Vercel](https://img.shields.io/badge/Live_Demo-Vercel-000?logo=vercel&logoColor=white&style=flat)](https://ear-buzz-podcast.vercel.app/)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)  
 [![GitHub Stars](https://img.shields.io/github/stars/tawandakasunzuma/ear-buzz-podcast?style=social)](https://github.com/tawandakasunzuma/ear-buzz-podcast/stargazers)  
@@ -12,13 +12,15 @@
 
 ## 📝 Overview
 
-**Podcast App** is a React project built that enables users to:
+**Ear Buzz Podcast App** lets users:
 
-- 🔍 Browse, search, and filter podcast shows
-- 🔊 Play episodes with a **global audio player** that persists across pages
-- ❤️ Mark episodes as **favourites** and view them on a dedicated page
-- 🎠 Discover new content via a **recommended shows carousel**
-- 🌗 Switch between **light & dark themes**, with preference saved in `localStorage`
+- 🔍 Browse, search, and filter podcast shows  
+- 🔊 Play episodes with a global audio player that persists across pages  
+- ❤️ Mark episodes as favourites and view them on a dedicated page  
+- 🎠 Discover new content via a recommended shows carousel  
+- 🌗 Switch between light and dark themes, with preference saved in `localStorage`
+
+Designed for seamless navigation and responsive layouts.
 
 ---
 
@@ -26,33 +28,21 @@
 
 - **React** (v18)
 - **React Router** (v6)
-- **CSS** (normal CSS for styling)
+- **CSS** (normal CSS)
 - **LocalStorage** (favourites & theme persistence)
+- **Git & GitHub** (version control)
 - **Vercel** (deployment)
 
 ---
 
 ## 🚀 Key Features
 
-- **Global Audio Player**
-
-  - Fixed at bottom, play/pause, seek, and progress tracking
-  - Prompts on reload/close while playing
-
-- **Episode Favourites**
-
-  - Click star icon to add/remove favourites
-  - Favourites page grouped by show, sortable by title or date added
-
-- **Recommended Shows Carousel**
-
-  - Horizontally scrollable & looping
-  - Displays show image, title, and genre tags
-  - Click to navigate to show detail
-
-- **Theme Toggle**
-  - Light/dark switch with ☀️/🌙 icons
-  - Preference stored in `localStorage`
+- 🔊 Global audio player fixed at the bottom of the screen  
+- ⏯️ Playback controls including play, pause, seek, and progress tracking  
+- ⚠️ Confirmation prompt on page reload or close while audio is playing  
+- ⭐ Mark episodes as favourites and view them on a dedicated page  
+- 🎠 Recommended shows carousel with horizontal scrolling  
+- 🌗 Light/dark theme toggle with preference persistence in localStorage
 
 ---
 
