@@ -1,8 +1,12 @@
-# 🎧 Podcast App
+# 🎧 Ear Buzz Podcast App
 
 > A polished and responsive React podcast platform that allows users to explore, play, and favourite episodes with seamless navigation and theme personalization.
 
 [![Live Demo](https://img.shields.io/badge/Live_Demo-Vercel-000?logo=vercel&logoColor=white&style=flat)](https://ear-buzz-podcast.vercel.app/)
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)  
+[![GitHub Stars](https://img.shields.io/github/stars/tawandakasunzuma/ear-buzz-podcast?style=social)](https://github.com/tawandakasunzuma/ear-buzz-podcast/stargazers)  
+[![GitHub Issues](https://img.shields.io/github/issues/tawandakasunzuma/ear-buzz-podcast)](https://github.com/tawandakasunzuma/ear-buzz-podcast/issues)
 
 ---
 
